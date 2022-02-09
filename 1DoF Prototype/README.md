@@ -14,11 +14,10 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 ### Updates 
 
 - 2/8/21
-<<<<<<< HEAD
     - Designed, 3D printed, and assembled one degree of freedom reaction wheel testbed.
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/front_1DoF_testbed_V1.JPG" width="1000" >
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/side_1DoF_testbed_V1.JPG" width="1000" >
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/back_1DoF_testbed_V1.JPG" width="1000" >
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/front_1DoF_testbed_V1.JPG" width="700" >
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/side_1DoF_testbed_V1.JPG" width="700" >
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/back_1DoF_testbed_V1.JPG" width="700" >
 
 - 2/9/21
     Wired one Nidec 24H404H BLDC Motor to Arduino and wrote a program for it to spin in both directions.
