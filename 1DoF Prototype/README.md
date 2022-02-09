@@ -15,4 +15,6 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 - 2/8/21
     Designed, 3D printed, and assembled one degree of freedom reaction wheel testbed.
+- 2/9/21
+    Wired one Nidec 24H404H BLDC Motor to Arduino and wrote a program for it to spin in both directions.
     
