@@ -1,2 +1,10 @@
 # CubeSat_Attitude_Control
-A 1U CubeSat Reaction Wheel Attitude Control Testbed 
+Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed 
+
+
+## Major Milestones
+
+## Schedule
+
+## Budget
+

@@ -9,3 +9,10 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 - (2/8/21): Mount motor and IMU to test stand.
 - (2/8/21): Connect Motor and IMU to Arduino to test basic functions.
 - (2/8/21): Attempt to get PID Code to balance the reaction wheel. 
+
+
+### Updates 
+
+- 2/8/21
+    Designed, 3D printed, and assembled one degree of freedom reaction wheel testbed.
+    
