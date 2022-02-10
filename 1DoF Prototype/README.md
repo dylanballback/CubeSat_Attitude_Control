@@ -7,7 +7,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 - (2/8/21): Design and 3D print 1DoF test stand. Completed (2/8/21)
 - (2/8/21): Design and 3D print reaction wheel. Completed (2/8/21)
 - (2/8/21): Mount motor and IMU to test stand. Completed (2/8/21)
-- (2/8/21): Connect Motor and IMU to Arduino to test basic functions. 
+- (2/8/21): Connect Motor and IMU to Arduino to test basic functions. Completed (2/9/21)
 - (2/8/21): Attempt to get PID Code to balance the reaction wheel. 
 
 
@@ -21,3 +21,4 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 - 2/9/21
     Wired one Nidec 24H404H BLDC Motor to Arduino and wrote a program for it to spin in both directions.
+    Got MPU6050 with Kalman Filter up and runing reliably with the Arduino.
