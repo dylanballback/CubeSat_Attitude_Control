@@ -20,5 +20,5 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/back_1DoF_testbed_V1.JPG" width="700" >
 
 - 2/9/21
-    Wired one Nidec 24H404H BLDC Motor to Arduino and wrote a program for it to spin in both directions.
-    Got MPU6050 with Kalman Filter up and runing reliably with the Arduino.
+    - Wired one Nidec 24H404H BLDC Motor to Arduino and wrote a program for it to spin in both directions.
+    - Got MPU6050 with Kalman Filter up and runing reliably with the Arduino.
