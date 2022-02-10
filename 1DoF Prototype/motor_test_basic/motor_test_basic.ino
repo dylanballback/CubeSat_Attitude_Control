@@ -2,16 +2,7 @@
 //This is a simple test of spining a Nidec 24H404H BLDC Motor in the CC and CCW Direction through an Arduino
 
 #include <Wire.h>        // IIC communication library
-#include <PWM.h>        // Require Timer1 PWM frequency of 20Khz-25Khz for Nidec 24H677 BLDC Motor (https://github.com/terryjmyers/PWM)
-
-
-//************** Nidec 24H677H010 BLDC Motor Vars ****************
-const int nidecBrake = 8;      // Brake
-const int nidecDirection = 7;  // CW/CCW Nidec Motor
-const int ledsDirection = 3;   // Green LED direction indicators
-const int ledsBrake = 2;       // Red LED direction indicators
-const int nidecPWM = 9;        // Nidec Motor PWM
-//************** End of Nidec 24H677H010 BLDC Motor Vars ****************
+#include <PWM.h>        // Require Timer1 PWM frequency of 20Khz-25Khz for Nidec 24H677 BLDC Motor
 
 void setup() {
   // put your setup code here, to run once:
@@ -52,16 +43,29 @@ void setup() {
 // Brake OFF = Red LED OFF
 
 void loop() {
-  //Clock Wise Test
   digitalWrite(nidecBrake,HIGH);    // Nidec motor brake OFF
   digitalWrite(ledsBrake,LOW);      //Red LED OFF // Brake OFF
-  //analogWrite(nidecPWM,100);      // Nidec PWM speed
+
+  //Clock Wise Test
+  //Motor stopped gradually increasing to full speed
   for(int i=390; i>0; i--){
     analogWrite(nidecPWM, i);
     digitalWrite(nidecDirection,HIGH); // Nidec Direction CW
     digitalWrite(ledsDirection,HIGH);  //Green LED ON // Direction CW
     delay(10);
   }
+
+  
+  //Testing the Brake Feature
+  analogWrite(nidecPWM,0); // No PWM Signal
+  digitalWrite(nidecBrake,LOW);     // Nidec motor brake ON
+  digitalWrite(ledsBrake,HIGH);     //Red LED ON // Brake ON
+  delay(1500);
+  digitalWrite(nidecBrake,HIGH);    // Nidec motor brake OFF
+  digitalWrite(ledsBrake,LOW);      //Red LED OFF // Brake OFF
+
+
+  //Motor full speed gradually decreasing to stopped
   for(int i=0; i<390; i++){
     analogWrite(nidecPWM, i);
     digitalWrite(nidecDirection,HIGH); // Nidec Direction CW
@@ -69,23 +73,23 @@ void loop() {
     delay(10);
   }
 
-
+  
   //Counter Clock Wise Test
+  //Motor stopped gradually increasing to full speed
   for(int i=390; i>0; i--){
     analogWrite(nidecPWM, i);
     digitalWrite(nidecDirection,LOW); // Nidec Direction CCW
     digitalWrite(ledsDirection,LOW);  //Green LED OFF // Direction CCW
     delay(10);
   }
+  
+   //Motor full speed gradually decreasing to stopped
   for(int i=0; i<390; i++){
     analogWrite(nidecPWM, i);
     digitalWrite(nidecDirection,LOW); // Nidec Direction CCW
     digitalWrite(ledsDirection,LOW);  //Green LED OFF // Direction CCW
     delay(10);
   }
-  
-
-  
+ } 
   
   
-}
