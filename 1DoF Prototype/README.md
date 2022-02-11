@@ -29,11 +29,19 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 - 2/9/22
     - Wired one Nidec 24H404H BLDC Motor to Arduino and wrote a program for it to spin in both directions. [Basic Motor Test Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/motor_test_basic/motor_test_basic.ino)
+    
+    <p float="left">
+        <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/pwm_duty_cycle_test1.jpeg" width="400" >
+        <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/pwm_duty_cycle_test2.jpeg" width="400" >
+        <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/motor_run_breadboard.jpeg" width="400" >
+    </p>
+
     - Got MPU6050 with Kalman Filter up and runing reliably with the Arduino. [MPU6050 Kalmain Filter Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/MPU6050_Kalman_Filter/MPU6050_Kalman_Filter.ino)
 
 
 - 2/10/22
     - Testing and data collection of RPM with relation to voltage and PWM signal using Encoder [Encoder RPM Test Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/encoder_test/encoder_test.ino)
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/encoder_1Dof_test1.jpeg" width="400" >
     - Attempted and wrote two different versions of a PID controller [Balance PID V1](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V1/balance_V1.ino) [Balance PID V2](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V2/balance_V2.ino)
     - Found out I need to research more about PID tunning methods, and size and weight of the reaction wheel
      <p float="left">
