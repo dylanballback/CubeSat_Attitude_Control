@@ -38,8 +38,8 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
     
 <p float="left">
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/motor_run_breadboard1.jpeg" width="250" style="float: left">
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/pwm_duty_cycle_test1.jpeg" width="355" style="float: right" >
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/pwm_duty_cycle_test2.jpeg" width="355" style="float: right">
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/pwm_duty_cycle_test1.jpeg" width="365" style="float: right" >
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/pwm_duty_cycle_test2.jpeg" width="365" style="float: right">
     Testing relationship between PWM duty cycle and motor speed
 </p>
 
