@@ -50,17 +50,22 @@ double cumError, rateError;              // Initialize the cumulative Error (Int
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-int errorcw = 0;
-int errorccw = 0;
-int correction = 0;
-double kp = 57;
-double ki = 26;
-double kd = 12;
-int PID = 0;
-int error = 0;
-int last_error = 0;
-int angle = 0;
-int sp = 839;
+//PID constants
+double kp = 5;
+double ki = 0;
+double kd = 0;
+
+unsigned long currentTime, previousTime;
+double elapsedTime;
+double error;
+double lastError;
+double input, output, setPoint;
+double cumError, rateError;
+double map_out;
+double map_pwm_out;
+double max_cumError;
+double last_cumError;
+double cumError_difference;
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -115,11 +120,15 @@ void setup() {
   compAngleX = roll;
   compAngleY = pitch;
 
-  timer = micros();
+  //timer = micros();
 //------------------------------------------------ Kalman Filter END --------------------------------------------------------
   
-  time = millis(); //Start counting time in milliseconds
+ // time = millis(); //Start counting time in milliseconds
 
+  setPoint = 0;  //set point at zero degrees
+  
+  max_cumError = 0;
+  
 }
 
 
@@ -139,7 +148,7 @@ void loop() {
   Serial.print("               "); 
 
   
-  /*
+  
   if (x_angle > 4){
     dir = 0; //CCW
     Serial.print("dir: ");
@@ -152,29 +161,16 @@ void loop() {
     Serial.print("CCW");
     Serial.print("               ");
   }
-  */
-
-  if(x_angle < sp)
-  {
-  errorcw = (sp-x_angle);
-  correction = calcPid(errorcw);
-  dir = 1; //CW
-  }
-  if(x_angle > sp)
-  {
-  errorccw = (x_angle-sp);
-  correction = calcPid(errorccw);
-  dir = 0; //CCW
-  }
-  Serial.print("errorcw: ");
-  Serial.print(errorcw);
-  Serial.print("               ");
-  Serial.print("correction: ");
-  Serial.print(correction);
-  Serial.print("               ");
-  Serial.print("dir: ");
-  Serial.print(dir);
-  Serial.print("               ");
+ 
+  input = x_angle;                //read from rotary encoder connected to A0
+  output = computePID(input);
+  delay(100);
+  Serial.print("output: ");
+  Serial.print(output);
+  Serial.print("\n");
+  
+  driveMotor(map_pwm_out, dir);
+  
 }//end of loop void
 
 
@@ -264,6 +260,7 @@ double kalman(){
 // For pwm: 400 = stopped and 0 = full speed
 // For dir: 0 = CCW and 1 = CW
 void driveMotor(float pwm,int dir){
+  //if pwm 
   digitalWrite(nidecBrake,HIGH);    // Nidec motor brake OFF
   digitalWrite(ledsBrake,LOW);      //Red LED OFF // Brake OFF
   if(dir == 0){
@@ -332,9 +329,58 @@ double computePID()
 }
 */
 
-int calcPID(int error)
-{
-  PID = (kp*(error)) + (ki*(error + last_error)) + (kd*(error - last_error));
-  last_error = error;
-  return constrain(PID, 0, 400)
+double computePID(double inp){     
+        currentTime = millis();                //get current time
+        elapsedTime = (double)(currentTime - previousTime);        //compute time elapsed from previous computation
+        
+        error = setPoint - inp;                                // determine error
+        Serial.print("error: ");
+        Serial.print(error);
+        Serial.print("               ");
+        cumError += error * elapsedTime;                // compute integral
+        Serial.print("cumError: ");
+        Serial.print(cumError);
+        Serial.print("               ");
+        rateError = (error - lastError)/elapsedTime;   // compute derivative
+        Serial.print("rateError: ");
+        Serial.print(rateError);
+        Serial.print("               ");
+        double out = kp*error + ki*cumError + kd*rateError;                //PID output               
+        Serial.print("PID_out: ");
+        Serial.print(out);
+        Serial.print("               ");
+        lastError = error;                                //remember current error
+        previousTime = currentTime;                       //remember current time
+        
+        if (inp > 33.50){
+          max_cumError = -out;
+        }
+        Serial.print("max_cumError: ");
+        Serial.print(max_cumError);
+        Serial.print("               ");
+       
+        
+        //Maping the PID output from its range of 0 to maximum cumError to 0 to 400
+        //Because max PWM value motor can recive is 400
+        map_out = map(out, 0, max_cumError, 0, 400);
+        
+        //To ensure no signal is sent over 400 and converts any negative number to positive
+        if (map_out < 0){
+          map_out = -map_out;
+        }
+        else if (map_out > 400){
+          map_out = 400;
+        }
+        
+        //Because motor PWM signal is 400=stopped and 0=full speed
+        //Flip it to be 0=stopped and 400=full speed
+        map_pwm_out = map(map_out, 0, 400, 400, 0);
+        
+        Serial.print("map_out: ");
+        Serial.print(map_out);
+        Serial.print("               ");
+        Serial.print("map_pwm_out: ");
+        Serial.print(map_pwm_out);
+        Serial.print("               ");
+        return map_pwm_out;                                        //have function return the PID output
 }
