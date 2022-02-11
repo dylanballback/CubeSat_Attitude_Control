@@ -33,7 +33,7 @@ uint32_t timer;
 uint8_t i2cData[14]; // Buffer for I2C data
 //---------------------------------------- Kalman Filter START -------------------------------------------------------
 
-
+/*
 float elapsedTime, time, timePrev; //time vars
 //---------------------------------------- PID Vars START -------------------------------------------------------
 //PID constants
@@ -45,9 +45,22 @@ double error, lastError;                 // Initialize error and previousError
 double input, output, setPoint;          // Initialize input variable from IMU, the output variable, and the desired setPoint
 double cumError, rateError;              // Initialize the cumulative Error (Integral) and the rate of Error (Derivative)
 //---------------------------------------- PID Vars END  -------------------------------------------------------
+*/
 
-
-
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+int errorcw = 0;
+int errorccw = 0;
+int correction = 0;
+double kp = 57;
+double ki = 26;
+double kd = 12;
+int PID = 0;
+int error = 0;
+int last_error = 0;
+int angle = 0;
+int sp = 839;
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -119,8 +132,6 @@ void setup() {
 
 
 void loop() {
-
-  output = computePID(setPoint);
   
   double x_angle = - kalman();
   Serial.print("x_angle: ");
@@ -128,6 +139,7 @@ void loop() {
   Serial.print("               "); 
 
   
+  /*
   if (x_angle > 4){
     dir = 0; //CCW
     Serial.print("dir: ");
@@ -140,9 +152,36 @@ void loop() {
     Serial.print("CCW");
     Serial.print("               ");
   }
+  */
+
+  if(x_angle < sp)
+  {
+  errorcw = (sp-x_angle);
+  correction = calcPid(errorcw);
+  dir = 1; //CW
+  }
+  if(x_angle > sp)
+  {
+  errorccw = (x_angle-sp);
+  correction = calcPid(errorccw);
+  dir = 0; //CCW
+  }
+  Serial.print("errorcw: ");
+  Serial.print(errorcw);
+  Serial.print("               ");
+  Serial.print("correction: ");
+  Serial.print(correction);
+  Serial.print("               ");
+  Serial.print("dir: ");
+  Serial.print(dir);
+  Serial.print("               ");
 }//end of loop void
 
 
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -239,7 +278,8 @@ void driveMotor(float pwm,int dir){
     } 
 }
 
-// PID function
+/*
+// V2 PID function
 double computePID()
 {
     read_IMU();
@@ -289,4 +329,12 @@ double computePID()
 
     // PID control return
     return PID_output;
+}
+*/
+
+int calcPID(int error)
+{
+  PID = (kp*(error)) + (ki*(error + last_error)) + (kd*(error - last_error));
+  last_error = error;
+  return constrain(PID, 0, 400)
 }
