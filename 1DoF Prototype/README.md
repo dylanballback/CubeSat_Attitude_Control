@@ -53,7 +53,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
     </p>
 
     - Designed and printed version 2 of reaction wheel with increased radius and weight 
-    - Trying https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method for PID tunning
+    - Trying [Ziegler–Nichols method link](https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method) for PID tunning.
 
 - 2/11/22
-    - Achived a working PID program that maps out PWM values within operating range of the motor [Untuned Balance PID code V3](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V3/balance_V3.ino)
+    - Achived a working PID program that maps out PWM values within operating range of the motor. [Untuned Balance PID code V3](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V3/balance_V3.ino)
