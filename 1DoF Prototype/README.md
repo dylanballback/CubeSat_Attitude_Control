@@ -29,3 +29,4 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
     - Attempted and wrote two different versions of a PID controller
     - Found out I need to research more about PID tunning methods, and size and weight of the reaction wheel
     - Designed and printed version 2 of reaction wheel with increased radius and weight
+    - Trying https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method for PID tunning
