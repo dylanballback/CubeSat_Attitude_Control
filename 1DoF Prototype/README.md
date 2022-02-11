@@ -11,8 +11,12 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 | 2/8/22 | ~~Mount motor and IMU to test stand.~~ | 2/8/22
 | 2/8/22 | ~~Connect Motor and IMU to Arduino to test basic functions.~~ | 2/9/22
 | 2/8/22 | ~~Attempt to get PID Code to balance the reaction wheel.~~ | 2/10/22
+| 2/11/22 | ~~Get working untuned PID Code for the reaction wheel.~~ | 2/11/22
 | 2/11/22 | Research equations of motions for 1DoF. Calculate reaction wheel required moment of inertia. |
 | 2/11/22 | Research and attempt differnet methods for tuning PID controller. |
+| 2/11/22 | Achive 1DoF Reaction Wheel Balanced with tuned PID controller. |
+
+
 
 
 ## Updates 
