@@ -41,8 +41,10 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 - 2/10/22
     - Testing and data collection of RPM with relation to voltage and PWM signal using Encoder [Encoder RPM Test Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/encoder_test/encoder_test.ino)
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/encoder_1Dof_test1.jpeg" width="400" >
+        <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/encoder_1Dof_test1.jpeg" width="400" >
+
     - Attempted and wrote two different versions of a PID controller [Balance PID V1](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V1/balance_V1.ino) [Balance PID V2](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V2/balance_V2.ino)
+
     - Found out I need to research more about PID tunning methods, and size and weight of the reaction wheel
      <p float="left">
         <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/CAD_1Dof_testbed_V2.jpeg" width="400" >
