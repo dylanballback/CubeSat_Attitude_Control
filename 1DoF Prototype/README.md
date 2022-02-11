@@ -43,13 +43,13 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
     Testing relationship between PWM duty cycle and motor speed
 </p>
 
-- Got MPU6050 with Kalman Filter up and runing reliably with the Arduino. [MPU6050 Kalmain Filter Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/MPU6050_Kalman_Filter/MPU6050_Kalman_Filter.ino)
+- Got MPU6050 with Kalman Filter up and runing reliably with the Arduino. ([MPU6050 Kalmain Filter Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/MPU6050_Kalman_Filter/MPU6050_Kalman_Filter.ino))
 
 ---
 
 
 ### 2/10/22
-- Testing and data collection of RPM with relation to voltage and PWM signal using Encoder [Encoder RPM Test Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/encoder_test/encoder_test.ino)
+- Testing and data collection of RPM with relation to voltage and PWM signal using Encoder ([Encoder RPM Test Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/encoder_test/encoder_test.ino))
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/encoder_1Dof_test1.jpeg" width="400" >
 
 - Attempted and wrote two non-working different versions of a PID controller. ( [Balance PID Code V1](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V1/balance_V1.ino) )( [Balance PID Code V2](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V2/balance_V2.ino))
