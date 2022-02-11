@@ -4,7 +4,7 @@
 The goal of this is to first protoype how to balance a 1 degree of freedom system before jumping stright into a 6 degree of freedom system. This initial test will teach us how to operate a single motor and read IMU data. Additionally learning how to make a simple PID controller to balance a 1 Dof system. Allow us to measure how much energy is required with one motor in a single degree of freedom. 
 
 ## To-Do
-- (2/8/22): Design and 3D print 1DoF test stand. Completed (2/8/22)
+- Declared (2/8/22) - Completed (2/8/22): Design and 3D print 1DoF test stand. 
 - (2/8/22): Design and 3D print reaction wheel. Completed (2/8/22)
 - (2/8/22): Mount motor and IMU to test stand. Completed (2/8/22)
 - (2/8/22): Connect Motor and IMU to Arduino to test basic functions. Completed (2/9/22)
