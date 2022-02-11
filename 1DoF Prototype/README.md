@@ -63,7 +63,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 ---
 
 ### 2/11/22
-    - Achived a working PID program that maps out PWM values within operating range of the motor. ([Untuned Balance PID code V3](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V3/balance_V3.ino))
+- Achived a working PID program that maps out PWM values within operating range of the motor. ([Untuned Balance PID code V3](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V3/balance_V3.ino))
 
 
 ---
