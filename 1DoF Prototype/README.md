@@ -26,6 +26,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
         <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/back_1DoF_testbed_V1.jpeg" width="500" >
     </p>
     
+---
 
 - 2/9/22
     - Wired one Nidec 24H404H BLDC Motor to Arduino and wrote a program for it to spin in both directions. [Basic Motor Test Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/motor_test_basic/motor_test_basic.ino)
@@ -39,6 +40,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
     - Got MPU6050 with Kalman Filter up and runing reliably with the Arduino. [MPU6050 Kalmain Filter Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/MPU6050_Kalman_Filter/MPU6050_Kalman_Filter.ino)
 
+---
 
 - 2/10/22
     - Testing and data collection of RPM with relation to voltage and PWM signal using Encoder [Encoder RPM Test Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/encoder_test/encoder_test.ino)
@@ -54,6 +56,8 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
     - Designed and printed version 2 of reaction wheel with increased radius and weight 
     - Trying [Ziegler–Nichols method](https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method) for PID tunning.
+
+---
 
 - 2/11/22
     - Achived a working PID program that maps out PWM values within operating range of the motor. ([Untuned Balance PID code V3](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V3/balance_V3.ino))
