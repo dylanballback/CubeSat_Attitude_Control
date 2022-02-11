@@ -17,9 +17,9 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
     - Designed, 3D printed, and assembled one degree of freedom reaction wheel testbed.
     <p float="left">
         <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/CAD_1DOF_testbed_V1.jpeg" width="350" >
-        <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/front_1DoF_testbed_V1.JPG" width="350" >
-        <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/side_1DoF_testbed_V1.JPG" width="350" >
-        <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/back_1DoF_testbed_V1.JPG" width="350" >
+        <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/front_1DoF_testbed_V1.jpeg" width="350" >
+        <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/side_1DoF_testbed_V1.jpeg" width="350" >
+        <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/back_1DoF_testbed_V1.jpeg" width="350" >
     </p>
     
 
