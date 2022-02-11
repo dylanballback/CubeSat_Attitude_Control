@@ -1,0 +1,7 @@
+{
+    "configuration": "cpu=atmega328",
+    "board": "arduino:avr:nano",
+    "port": "/dev/cu.usbserial-1120",
+    "sketch": "1DoF Prototype/Arduino/encoder_test/encoder_test.ino",
+    "programmer": "arduino:arduinoisp"
+}

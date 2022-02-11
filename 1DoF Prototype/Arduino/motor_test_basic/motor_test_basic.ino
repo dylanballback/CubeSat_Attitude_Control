@@ -1,11 +1,23 @@
+
 //This code is written based off of https://github.com/squirtifier/DIY---1D-Wannabe-Cubli-Reaction-Wheel/blob/main/ReactionwheelV13.5Final/ReactionwheelV13.5/ReactionwheelV13.5.ino
 //This is a simple test of spining a Nidec 24H404H BLDC Motor in the CC and CCW Direction through an Arduino
 
 #include <Wire.h>        // IIC communication library
-#include <PWM.h>        // Require Timer1 PWM frequency of 20Khz-25Khz for Nidec 24H677 BLDC Motor
+#include <PWM.h>        // Require Timer1 PWM frequency of 20Khz-25Khz for Nidec 24H677 BLDC Motor (https://github.com/terryjmyers/PWM)
+
+
+//************** Nidec 24H677H010 BLDC Motor Vars ****************
+const int nidecBrake = 8;      // Brake
+const int nidecDirection = 7;  // CW/CCW Nidec Motor
+const int ledsDirection = 6;   // Green LED direction indicators
+const int ledsBrake = 5;       // Red LED direction indicators
+const int nidecPWM = 9;        // Nidec Motor PWM
+//************** End of Nidec 24H677H010 BLDC Motor Vars ****************
+
 
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(9600);
+  //*************************** Nidec 24H677H010 BLDC Motor Setup *****************************
   // PWM.h Setup
   InitTimersSafe();
   // The Nidec 24H677 BLDC Motor requires a PWM frequency of 20KHz to 25KHz
@@ -23,14 +35,15 @@ void setup() {
   digitalWrite(ledsDirection,LOW); //Green LED OFF // Direction CCW
   digitalWrite(nidecBrake,LOW); // Nidec motor brake is ON
   digitalWrite(ledsBrake,HIGH); //Red LED ON // Brake ON
-  analogWrite(nidecPWM,0); // No PWM Signal
-  
-  // Nidec motor PWM - 5% Duty Cycle = High Speed and 90% Duty Cycle = Low Speed
-  //  This is oppisite of a standard DC motor therefore we have to map different values for pwmOut2
-  // pwmOut2 = map(pwmOut, -255, 255, -180, 130);//-130, 130 // modify the last two values for your BLDC motor
-  //Serial.println(pwmOut);
+  analogWrite(nidecPWM,400); // Motor Stop PWM Signal
+
 }
 
+// Nidec motor PWM - 5% Duty Cycle = High Speed and 90% Duty Cycle = Low Speed
+//  This is oppisite of a standard DC motor therefore we have to map different values for pwmOut2
+// pwmOut2 = map(pwmOut, -255, 255, -180, 130);//-130, 130 // modify the last two values for your BLDC motor
+//Serial.println(pwmOut);
+  
 // Motor Full Speed at pwm = 0
 // Motor Stop at pwm = 390
 
@@ -91,5 +104,3 @@ void loop() {
     delay(10);
   }
  } 
-  
-  
