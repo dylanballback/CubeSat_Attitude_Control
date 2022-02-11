@@ -5,12 +5,12 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 ## To-Do
 - Declared (2/8/22) - Completed (2/8/22): Design and 3D print 1DoF test stand. 
-- (2/8/22): Design and 3D print reaction wheel. Completed (2/8/22)
-- (2/8/22): Mount motor and IMU to test stand. Completed (2/8/22)
-- (2/8/22): Connect Motor and IMU to Arduino to test basic functions. Completed (2/9/22)
-- (2/8/22): Attempt to get PID Code to balance the reaction wheel. Completed (2/10/22)
-- (2/11/22): Research equations of motions for 1DoF system. Calculate reaction wheel required moment of inertia.
-- (2/11/22): Research and attempt differnet methods for tuning PID controller.
+- Declared (2/8/22) - Completed (2/8/22): Design and 3D print reaction wheel.
+- Declared (2/8/22) - Completed (2/8/22): Mount motor and IMU to test stand.
+- Declared (2/8/22) - Completed (2/9/22): Connect Motor and IMU to Arduino to test basic functions.
+- Declared (2/8/22) - Completed (2/10/22): Attempt to get PID Code to balance the reaction wheel.
+- Declared (2/11/22): Research equations of motions for 1DoF system. Calculate reaction wheel required moment of inertia.
+- Declared (2/11/22): Research and attempt differnet methods for tuning PID controller.
 
 
 ### Updates 
