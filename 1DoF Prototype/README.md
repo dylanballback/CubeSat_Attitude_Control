@@ -31,7 +31,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
     - Wired one Nidec 24H404H BLDC Motor to Arduino and wrote a program for it to spin in both directions. [Basic Motor Test Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/motor_test_basic/motor_test_basic.ino)
     
     <p float="left">
-        <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/motor_run_breadboard1.jpeg" width="200" style="float: left">
+        <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/motor_run_breadboard1.jpeg" width="250" style="float: left">
         <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/pwm_duty_cycle_test1.jpeg" width="350" style="float: right" >
         <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/pwm_duty_cycle_test2.jpeg" width="350" style="float: right">
     </p>
