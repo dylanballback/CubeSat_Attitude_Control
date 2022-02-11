@@ -270,17 +270,17 @@ double computePID()
     PID_I = ki * cumError;  // Integral
     PID_D = kd * rateError; // Derivative
 
-    if (PID_P > 255) PID_P = 255;
-    if (PID_P < -255) PID_P = -255;
-    if (PID_I > 255) PID_I = 255;
-    if (PID_I < -255) PID_I = -255;
-    if (PID_D > 255) PID_D = 255;
-    if (PID_D < -255) PID_D = -255;
+    if (PID_P > 400) PID_P = 400;
+    if (PID_P < 0) PID_P = 0;
+    if (PID_I > 400) PID_I = 400;
+    if (PID_I < 0) PID_I = 0;
+    if (PID_D > 400) PID_D = 400;
+    if (PID_D < 0) PID_D = 0;
 
     double PID_output = PID_P + PID_I + PID_D; // PID control
 
-    if (PID_output > 255) PID_output = 255;
-    if (PID_output < -255) PID_output = -255;
+    if (PID_output > 400) PID_output = 400;
+    if (PID_output < 0) PID_output = 0;
 
 
     // Save current error and time for next iteration
