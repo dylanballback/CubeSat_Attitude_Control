@@ -44,7 +44,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
     - Testing and data collection of RPM with relation to voltage and PWM signal using Encoder [Encoder RPM Test Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/encoder_test/encoder_test.ino)
         <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/encoder_1Dof_test1.jpeg" width="400" >
 
-    - Attempted and wrote two different versions of a PID controller [Balance PID V1](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V1/balance_V1.ino) [Balance PID V2](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V2/balance_V2.ino)
+    - Attempted and wrote two different versions of a PID controller [Balance PID code V1 (non working)](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V1/balance_V1.ino) [Balance PID code (non working)](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V2/balance_V2.ino)
 
     - Found out I need to research more about PID tunning methods, and size and weight of the reaction wheel
      <p float="left">
@@ -54,3 +54,6 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
     - Designed and printed version 2 of reaction wheel with increased radius and weight 
     - Trying https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method for PID tunning
+
+- 2/11/22
+    - Achived a working PID program that maps out PWM values within operating range of the motor [Untuned Balance PID code V3](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V3/balance_V3.ino)
