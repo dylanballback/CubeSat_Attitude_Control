@@ -40,7 +40,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/motor_run_breadboard1.jpeg" width="250" style="float: left">
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/pwm_duty_cycle_test1.jpeg" width="375" style="float: right" >
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/pwm_duty_cycle_test2.jpeg" width="375" style="float: right">
-    Testing relationship between PWM duty cycle and motor speed
+    <Testing relationship between PWM duty cycle and motor speed sytle="float: center">
 </p>
 
 - Got MPU6050 with Kalman Filter up and runing reliably with the Arduino. ([MPU6050 Kalmain Filter Code](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/MPU6050_Kalman_Filter/MPU6050_Kalman_Filter.ino))
