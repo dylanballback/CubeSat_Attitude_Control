@@ -331,7 +331,7 @@ double computePID(double inp){
         
         //Because motor PWM signal is 400=stopped and 0=full speed
         //Flip it to be 0=stopped and 400=full speed
-        map_pwm_out = map(map_out, 0, 400, 350, 0);
+        map_pwm_out = map(map_out, 0, 400, 400, 0);
         
         Serial.print("map_out: ");
         Serial.print(map_out);
