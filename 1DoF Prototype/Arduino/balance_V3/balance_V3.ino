@@ -31,13 +31,13 @@ double kalAngleX, kalAngleY; // Calculated angle using a Kalman filter
 
 uint32_t timer;
 uint8_t i2cData[14]; // Buffer for I2C data
-//---------------------------------------- Kalman Filter START -------------------------------------------------------
+//---------------------------------------- Kalman Filter END -------------------------------------------------------
 
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//PID constants
+
+//---------------------------------------- PID Vars START -------------------------------------------------------
+// PID Code Refrences (https://www.teachmemicro.com/arduino-pid-control-tutorial/)
+//PID constants 
 double kp = 25;
 double ki = 0;
 double kd = 0;
@@ -50,16 +50,17 @@ double input, output, setPoint;
 double cumError, rateError;
 double map_out;
 double map_pwm_out;
-double max_cumError;
-double last_cumError;
-double cumError_difference;
+double max_Error;
+
+setPoint = 0;  //Set point at zero degrees
+max_Error = 0; //Set max_error at 0
+//---------------------------------------- PID Vars END -----------------------------------------------------------
 
 
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Setup Function Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 void setup() {
   
@@ -129,26 +130,18 @@ void setup() {
   gyroYangle = pitch;
   compAngleX = roll;
   compAngleY = pitch;
-
-  //timer = micros();
 //------------------------------------------------ Kalman Filter END --------------------------------------------------------
-  
- // time = millis(); //Start counting time in milliseconds
-
-  setPoint = 0;  //set point at zero degrees
-  
-  max_cumError = 0;
-  
 }
 
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Setup Function END %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Loop Function START %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
 
 void loop() {
   
@@ -183,10 +176,8 @@ void loop() {
   
 }//end of loop void
 
-
-
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Loop Function END %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -266,7 +257,11 @@ double kalman(){
   //Serial.print('\n');
   return kalAngleX;
 }
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  Kalman Filter Function END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
+
+
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  Drive Motor Function START $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 // For pwm: 400 = stopped and 0 = full speed
 // For dir: 0 = CCW and 1 = CW
 void driveMotor(float pwm,int dir){
@@ -284,8 +279,11 @@ void driveMotor(float pwm,int dir){
     digitalWrite(ledsDirection,HIGH);  //Green LED ON // Direction CW
     } 
 }
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  Drive Motor Function END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
+
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  Compute PID Function START $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 double computePID(double inp){     
         currentTime = millis();                //get current time
         elapsedTime = (double)(currentTime - previousTime);        //compute time elapsed from previous computation
@@ -310,34 +308,24 @@ double computePID(double inp){
         previousTime = currentTime;                       //remember current time
         
         if (inp > 33.50){
-          max_cumError = -out;
+          max_Error = -out;
         }
-        Serial.print("max_cumError: ");
-        Serial.print(max_cumError);
+        Serial.print("max_Error: ");
+        Serial.print(max_Error);
         Serial.print("    ");
        
         
         //Maping the PID output from its range of 0 to maximum cumError to 0 to 400
-        //Because max PWM value motor can recive is 400
-        map_out = map(out, 0, max_cumError, 0, 400);
-        
-        //To ensure no signal is sent over 400 and converts any negative number to positive
-        if (map_out < 0){
-          map_out = -map_out;
-        }
-        else if (map_out > 400){
-          map_out = 400;
-        }
+        //Max PWM value motor can recive is 400
+        map_out = map(out, 0, max_Error, 0, 400);
         
         //Because motor PWM signal is 400=stopped and 0=full speed
         //Flip it to be 0=stopped and 400=full speed
         map_pwm_out = map(map_out, 0, 400, 400, 0);
-        
-        Serial.print("map_out: ");
-        Serial.print(map_out);
-        Serial.print("    ");
         Serial.print("map_pwm_out: ");
         Serial.print(map_pwm_out);
         Serial.print("    ");
-        return map_pwm_out;                                        //have function return the PID output
+
+        return map_pwm_out;  //have function return the mapped PID output
 }
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  Compute PID Function END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
