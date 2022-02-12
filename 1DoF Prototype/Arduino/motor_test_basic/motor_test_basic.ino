@@ -58,7 +58,16 @@ void setup() {
 void loop() {
   digitalWrite(nidecBrake,HIGH);    // Nidec motor brake OFF
   digitalWrite(ledsBrake,LOW);      //Red LED OFF // Brake OFF
-
+  digitalWrite(nidecDirection,LOW); // Nidec Direction CCW
+  digitalWrite(ledsDirection,LOW); //Green LED OFF // Direction CCW
+  analogWrite(nidecPWM, 0);
+  delay(2000);
+  digitalWrite(nidecDirection,HIGH); // Nidec Direction CW
+  digitalWrite(ledsDirection,HIGH); //Green LED ON // Direction CW
+  analogWrite(nidecPWM, 1);
+  delay(2000);
+  
+/*
   //Clock Wise Test
   //Motor stopped gradually increasing to full speed
   for(int i=390; i>0; i--){
@@ -103,4 +112,5 @@ void loop() {
     digitalWrite(ledsDirection,LOW);  //Green LED OFF // Direction CCW
     delay(10);
   }
+  */
  } 

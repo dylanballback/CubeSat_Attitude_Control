@@ -33,25 +33,12 @@ uint32_t timer;
 uint8_t i2cData[14]; // Buffer for I2C data
 //---------------------------------------- Kalman Filter START -------------------------------------------------------
 
-/*
-float elapsedTime, time, timePrev; //time vars
-//---------------------------------------- PID Vars START -------------------------------------------------------
-//PID constants
-double kp = 3; // Proportional contribution
-double ki = 4; // Integral contribution
-double kd = 0; // Derivative contribution
-
-double error, lastError;                 // Initialize error and previousError
-double input, output, setPoint;          // Initialize input variable from IMU, the output variable, and the desired setPoint
-double cumError, rateError;              // Initialize the cumulative Error (Integral) and the rate of Error (Derivative)
-//---------------------------------------- PID Vars END  -------------------------------------------------------
-*/
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //PID constants
-double kp = 5;
+double kp = 25;
 double ki = 0;
 double kd = 0;
 
@@ -66,12 +53,35 @@ double map_pwm_out;
 double max_cumError;
 double last_cumError;
 double cumError_difference;
+
+
+
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 void setup() {
+  
+  // PWM.h Setup
+  InitTimersSafe();
+  // The Nidec 24H677 BLDC Motor requires a PWM frequency of 20KHz to 25KHz
+  bool success = SetPinFrequencySafe(nidecPWM, 20000);
+
+  //set the Nidec motor control pins 
+  pinMode(nidecBrake, OUTPUT);
+  pinMode(nidecDirection,OUTPUT);
+  pinMode(ledsDirection,OUTPUT);
+  pinMode(ledsBrake,OUTPUT);
+  pinMode(nidecPWM,OUTPUT);
+  
+  // Output initial state values
+  digitalWrite(nidecDirection,LOW); // Nidec Direction CCW
+  digitalWrite(ledsDirection,LOW); //Green LED OFF // Direction CCW
+  digitalWrite(nidecBrake,LOW); // Nidec motor brake is ON
+  digitalWrite(ledsBrake,HIGH); //Red LED ON // Brake ON
+
+  
 //---------------------------------------- Kalman Filter START -------------------------------------------------------
   Serial.begin(115200);
   Wire.begin();
@@ -145,21 +155,21 @@ void loop() {
   double x_angle = - kalman();
   Serial.print("x_angle: ");
   Serial.print(x_angle);
-  Serial.print("               "); 
+  Serial.print("    "); 
 
   
   
-  if (x_angle > 4){
+  if (x_angle > 1){
     dir = 0; //CCW
     Serial.print("dir: ");
     Serial.print("CW");
-    Serial.print("               ");
+    Serial.print("    ");
   }
-  else if (x_angle < 4){
+  else if (x_angle < 0){
     dir = 1; //CW
     Serial.print("dir: ");
     Serial.print("CCW");
-    Serial.print("               ");
+    Serial.print("    ");
   }
  
   input = x_angle;                //read from rotary encoder connected to A0
@@ -275,80 +285,27 @@ void driveMotor(float pwm,int dir){
     } 
 }
 
-/*
-// V2 PID function
-double computePID()
-{
-    read_IMU();
-    
-    // Percentage
-    volatile float IMU_deg_data_Z_perc = (IMU_deg_data_Z - 360)/(-360)*100;
-
-    OBC_data_value = OBC_data_value + IMU_deg_data_Z;
-    
-    if (OBC_data_value < 0) OBC_data_value += 360;
-    if (OBC_data_value >= 360) OBC_data_value -= 360; //Estas dos lineas contienen el valor del heading en 0-360 grados.
-    
-    // Transform angle to percentage
-    volatile float OBC_data_value_perc = (OBC_data_value - 360)/(-360)*100;
-
-
-    // Time
-    currentTime = millis();                             // Get current time
-    elapsedTime = (double)(currentTime - previousTime); // Compute elapsed time from previous time computation
-
-    // Errors
-    error = OBC_data_value_perc - IMU_deg_data_Z_perc;       // Calculate error (Proportional)
-    cumError += error * elapsedTime;               // Calculate the cumulative error (Integral)
-    rateError = (error - lastError) / elapsedTime; // Calculate the rate of error (Derivative)
-
-    // PID Control
-    PID_P = kp * error;     // Proportional
-    PID_I = ki * cumError;  // Integral
-    PID_D = kd * rateError; // Derivative
-
-    if (PID_P > 400) PID_P = 400;
-    if (PID_P < 0) PID_P = 0;
-    if (PID_I > 400) PID_I = 400;
-    if (PID_I < 0) PID_I = 0;
-    if (PID_D > 400) PID_D = 400;
-    if (PID_D < 0) PID_D = 0;
-
-    double PID_output = PID_P + PID_I + PID_D; // PID control
-
-    if (PID_output > 400) PID_output = 400;
-    if (PID_output < 0) PID_output = 0;
-
-
-    // Save current error and time for next iteration
-    lastError = error;          // Save current error
-    previousTime = currentTime; // Save current time
-
-    // PID control return
-    return PID_output;
-}
-*/
 
 double computePID(double inp){     
         currentTime = millis();                //get current time
         elapsedTime = (double)(currentTime - previousTime);        //compute time elapsed from previous computation
         
         error = setPoint - inp;                                // determine error
-        Serial.print("error: ");
-        Serial.print(error);
-        Serial.print("               ");
+        //Serial.print("error: ");
+        //Serial.print(error);
+        //Serial.print("               ");
         cumError += error * elapsedTime;                // compute integral
-        Serial.print("cumError: ");
-        Serial.print(cumError);
-        Serial.print("               ");
+        //Serial.print("cumError: ");
+        //Serial.print(cumError);
+        //Serial.print("               ");
         rateError = (error - lastError)/elapsedTime;   // compute derivative
-        Serial.print("rateError: ");
-        Serial.print(rateError);
-        Serial.print("               ");
+        //Serial.print("rateError: ");
+        //Serial.print(rateError);
+        //Serial.print("               ");
         double out = kp*error + ki*cumError + kd*rateError;                //PID output               
         Serial.print("PID_out: ");
         Serial.print(out);
-        Serial.print("               ");
+        Serial.print("       ");
         lastError = error;                                //remember current error
         previousTime = currentTime;                       //remember current time
         
@@ -357,7 +314,7 @@ double computePID(double inp){
         }
         Serial.print("max_cumError: ");
         Serial.print(max_cumError);
-        Serial.print("               ");
+        Serial.print("    ");
        
         
         //Maping the PID output from its range of 0 to maximum cumError to 0 to 400
@@ -374,13 +331,13 @@ double computePID(double inp){
         
         //Because motor PWM signal is 400=stopped and 0=full speed
         //Flip it to be 0=stopped and 400=full speed
-        map_pwm_out = map(map_out, 0, 400, 400, 0);
+        map_pwm_out = map(map_out, 0, 400, 350, 0);
         
         Serial.print("map_out: ");
         Serial.print(map_out);
-        Serial.print("               ");
+        Serial.print("    ");
         Serial.print("map_pwm_out: ");
         Serial.print(map_pwm_out);
-        Serial.print("               ");
+        Serial.print("    ");
         return map_pwm_out;                                        //have function return the PID output
 }
