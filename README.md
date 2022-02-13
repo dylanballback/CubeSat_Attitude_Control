@@ -14,12 +14,14 @@ Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be 
 | Create a 3 DoF reaction wheel controller able to reach any desired attitude using a PID controller |
 
 - CubeSat Hardware
+
 | Milestone | Completed |
 | --- | ---
 | CAD Assembly of 1U CubeSat with 3 Reaction wheels, IMU, Arduino, Raspberry Pi Zero, and Battery |    
 | 3D print and assemble 1U CubeSat will all componets mounted inside |    
 
 - Gimbal/Test Stand
+
 | Milestone | Completed |
 | --- | --- 
 | CAD Assembly of all three gimbal rings with mounting mounts to eachother and to the CubeSat |    
