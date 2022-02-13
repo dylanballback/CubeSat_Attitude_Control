@@ -4,7 +4,7 @@ Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be 
 
 ---
 
-## Major Milestones
+# Major Milestones
 ### Controls of Reaction Wheel
 | Milestone | Completed |
 | --- | ---
@@ -41,7 +41,7 @@ Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be 
 
 ---
 
-## Schedule
+# Schedule
 | Due By Date | To-Do | Completed | Class Assignment
 --- | --- | --- | ---
 | 2/13/22 | ~~Project Prosal~~ | 2/13/22 | Yes
@@ -52,7 +52,7 @@ Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be 
 
 ---
 
-## Budget
+# Budget
 | Declared | To-Do | Completed |
 --- | --- | ---
 | 2/8/22 | ~~Design and 3D print 1DoF test stand.~~ | 2/8/22
