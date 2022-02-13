@@ -9,7 +9,20 @@ The goal of the gimbal is to design and build a system that a 1U CubeSat mounts 
 ### Gimbal CAD
 | Declared | To-Do | Completed |
 --- | --- | ---
-| 2/8/22 | Design a 3 ring gimbal system that can fit a 1U CubeSat in the center |
+| 2/8/22 | Design mounting mechanism to attach the 1U CubeSat to the inner ring |
+| 2/8/22 | 3D print and test fitment of CubeSat connection to inner ring |
+| 2/8/22 | Calculate and design the smallest inner ring possible |
+| 2/8/22 | 3D print and test fitment of inner ring componets connection (if the ring is split into muiltiple prints) |
+| 2/8/22 | Design the middle ring that can freely rotate around the inner ring |
+| 2/8/22 | 3D print and test fitment of middle ring componets connection (if the ring is split into muiltiple prints) |
+| 2/8/22 | Design the outter ring that can freely rotate around the middle ring |
+| 2/8/22 | 3D print and test fitment of outter ring componets connection (if the ring is split into muiltiple prints) |
+| 2/8/22 | Design the bearing mounts and connection between each ring |
+| 2/8/22 | Test fitment of bearing componets into 3D printed ring and connection between the rings |
+| 2/8/22 | Design outter ring external mounting points to be compatiable to monut to a 80/20 test stand |
+
+
+
 
 ### Gimbal Hardware
 | Declared | To-Do | Completed |
