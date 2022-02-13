@@ -1,3 +1,4 @@
+
 #include <Kalman.h> // Source: https://github.com/TKJElectronics/KalmanFilter
 #include <Wire.h>        // IIC communication library
 #include <PWM.h>        // Require Timer1 PWM frequency of 20Khz-25Khz for Nidec 24H677 BLDC Motor
@@ -30,17 +31,14 @@ double kalAngleX, kalAngleY; // Calculated angle using a Kalman filter
 
 uint32_t timer;
 uint8_t i2cData[14]; // Buffer for I2C data
-//---------------------------------------- Kalman Filter START -------------------------------------------------------
-
-/*
-float elapsedTime, time, timePrev; //time vars
+//---------------------------------------- Kalman Filter END -------------------------------------------------------
 
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//PID constants
-double kp = 5;
+
+//---------------------------------------- PID Vars START -------------------------------------------------------
+// PID Code Refrences (https://www.teachmemicro.com/arduino-pid-control-tutorial/)
+//PID constants 
+double kp = 105;
 double ki = 0;
 double kd = 0;
 
@@ -52,15 +50,38 @@ double input, output, setPoint;
 double cumError, rateError;
 double map_out;
 double map_pwm_out;
-double max_cumError;
-double last_cumError;
-double cumError_difference;
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+double max_Error;
+double min_Error;
 
+//---------------------------------------- PID Vars END -----------------------------------------------------------
+
+
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Setup Function Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 void setup() {
+  
+  // PWM.h Setup
+  InitTimersSafe();
+  // The Nidec 24H677 BLDC Motor requires a PWM frequency of 20KHz to 25KHz
+  bool success = SetPinFrequencySafe(nidecPWM, 20000);
+
+  //set the Nidec motor control pins 
+  pinMode(nidecBrake, OUTPUT);
+  pinMode(nidecDirection,OUTPUT);
+  pinMode(ledsDirection,OUTPUT);
+  pinMode(ledsBrake,OUTPUT);
+  pinMode(nidecPWM,OUTPUT);
+  
+  // Output initial state values
+  digitalWrite(nidecDirection,LOW); // Nidec Direction CCW
+  digitalWrite(ledsDirection,LOW); //Green LED OFF // Direction CCW
+  digitalWrite(nidecBrake,LOW); // Nidec motor brake is ON
+  digitalWrite(ledsBrake,HIGH); //Red LED ON // Brake ON
+
+  
 //---------------------------------------- Kalman Filter START -------------------------------------------------------
   Serial.begin(115200);
   Wire.begin();
@@ -108,62 +129,70 @@ void setup() {
   gyroYangle = pitch;
   compAngleX = roll;
   compAngleY = pitch;
-
-
 //------------------------------------------------ Kalman Filter END --------------------------------------------------------
+  max_Error = 0; //Set max_error at 0
+  setPoint = 0;  //Set point at zero degrees
+  
 
-  setPoint = 0;  //set point at zero degrees
-  
-  max_cumError = 0;
-  
 }
 
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Setup Function END %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Loop Function START %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
 
 void loop() {
   
   double x_angle = - kalman();
-  Serial.print("x_angle: ");
-  Serial.print(x_angle);
-  Serial.print("               "); 
+  //Serial.print("x_angle: ");
+  //Serial.print(x_angle);
+  //Serial.print("    "); 
 
   
   
-  if (x_angle > 4){
+  if (x_angle > 1){
     dir = 0; //CCW
-    Serial.print("dir: ");
-    Serial.print("CW");
-    Serial.print("               ");
+    //Serial.print("dir: ");
+    //Serial.print("CW");
+    //Serial.print("    ");
   }
-  else if (x_angle < 4){
+  else if (x_angle < 0){
     dir = 1; //CW
-    Serial.print("dir: ");
-    Serial.print("CCW");
-    Serial.print("               ");
+    //Serial.print("dir: ");
+    //Serial.print("CCW");
+    //Serial.print("    ");
   }
  
-  input = x_angle;                
+  input = x_angle;                //read from rotary encoder connected to A0
   output = computePID(input);
   delay(100);
-  Serial.print("output: ");
-  Serial.print(output);
-  Serial.print("\n");
+  //Serial.print("\n");
+  //Serial.print("angle:");
+  //Serial.println(x_angle); //Print x-angle plot over time
+  //Serial.print("");
+  Serial.print("P:");
+  Serial.print(error);
+  Serial.print(",");
+  Serial.print("D:");
+  Serial.print(rateError);
+  Serial.print(",");
+  Serial.print("zero:");
+  Serial.print(setPoint);
+  Serial.print(",");
+  Serial.print("pwm:");
+  Serial.println(map_out);
   
   driveMotor(map_pwm_out, dir);
   
 }//end of loop void
 
-
-
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Loop Function END %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -243,7 +272,11 @@ double kalman(){
   //Serial.print('\n');
   return kalAngleX;
 }
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  Kalman Filter Function END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
+
+
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  Drive Motor Function START $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 // For pwm: 400 = stopped and 0 = full speed
 // For dir: 0 = CCW and 1 = CW
 void driveMotor(float pwm,int dir){
@@ -261,60 +294,64 @@ void driveMotor(float pwm,int dir){
     digitalWrite(ledsDirection,HIGH);  //Green LED ON // Direction CW
     } 
 }
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  Drive Motor Function END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
+
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  Compute PID Function START $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 double computePID(double inp){     
         currentTime = millis();                //get current time
         elapsedTime = (double)(currentTime - previousTime);        //compute time elapsed from previous computation
         
         error = setPoint - inp;                                // determine error
-        Serial.print("error: ");
-        Serial.print(error);
-        Serial.print("               ");
+        //Serial.print("P:");
+        //Serial.print(error);
+        //Serial.print(" ");
         cumError += error * elapsedTime;                // compute integral
-        Serial.print("cumError: ");
-        Serial.print(cumError);
-        Serial.print("               ");
+        //Serial.print("I:");
+        //Serial.print(cumError);
+        //Serial.print(" ");
         rateError = (error - lastError)/elapsedTime;   // compute derivative
-        Serial.print("rateError: ");
-        Serial.print(rateError);
-        Serial.print("               ");
+        //Serial.print("D:");
+        //Serial.print(rateError);
+        //Serial.print(" ");
         double out = kp*error + ki*cumError + kd*rateError;                //PID output               
-        Serial.print("PID_out: ");
-        Serial.print(out);
-        Serial.print("               ");
+        //Serial.print("PID_out:");
+        //Serial.print(out);
+        //Serial.print(" ");
         lastError = error;                                //remember current error
         previousTime = currentTime;                       //remember current time
         
         if (inp > 33.50){
-          max_cumError = -out;
+          min_Error = out;
         }
-        Serial.print("max_cumError: ");
-        Serial.print(max_cumError);
-        Serial.print("               ");
-       
+        else if(inp < -34){
+          max_Error = out;
+        }
+          
+        
+        //Serial.print("max_Error: ");
+        //Serial.print(max_Error);
+        //Serial.print("    ");
+        //Serial.print("min_Error: ");
+        //Serial.print(min_Error);
+        //Serial.print("    ");
         
         //Maping the PID output from its range of 0 to maximum cumError to 0 to 400
-        //Because max PWM value motor can recive is 400
-        map_out = map(out, 0, max_cumError, 0, 400);
-        
-        //To ensure no signal is sent over 400 and converts any negative number to positive
-        if (map_out < 0){
-          map_out = -map_out;
-        }
-        else if (map_out > 400){
-          map_out = 400;
-        }
+        //Max PWM value motor can recive is 400
+        map_out = map(out, min_Error, max_Error, 0, 400);
+        //Serial.print("map_out:");
+        //Serial.print(map_out);
+        //Serial.print(" ");
+        //if(map_out < 0){
+        //  map_out = - map_out;
+        //}
         
         //Because motor PWM signal is 400=stopped and 0=full speed
         //Flip it to be 0=stopped and 400=full speed
-        map_pwm_out = map(map_out, 0, 400, 400, 0);
-        
-        Serial.print("map_out: ");
-        Serial.print(map_out);
-        Serial.print("               ");
-        Serial.print("map_pwm_out: ");
-        Serial.print(map_pwm_out);
-        Serial.print("               ");
-        return map_pwm_out;                                        //have function return the PID output
+        map_pwm_out = map(map_out, 0, 400, 390, 0);
+      
+
+        return map_pwm_out;  //have function return the mapped PID output
 }
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  Compute PID Function END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
