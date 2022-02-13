@@ -60,8 +60,8 @@ Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be 
 --- | --- | --- | ---
 | 2/13/22 | ~~Project Proposal~~ | 2/13/22 | Yes
 | 2/27/22 | 1 DoF reaction wheel balance with PID |   |
-| 2/27/22 | Prototype CAD assembly of 1U CubeSat will all componets |   |
-| 2/27/22 | Prototype CAD assembly of Gimbal testbed with all componets |   |
+| 2/27/22 | Prototype CAD assembly of 1U CubeSat |   |
+| 2/27/22 | Prototype CAD assembly of Gimbal testbed |   |
 | 2/27/22 | Research Paper Outline | 
 | 2/27/22 | Research Reduction |   | Yes
 | 3/14/22 | 3D Print prototype 1U CubeSat and assemble  |    | 
@@ -72,8 +72,8 @@ Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be 
 | 3/21/22 | Reserch paper rough draft |    |
 | 3/21/22 | Project Update |    | Yes
 | 4/10/22 | 3 DoF reaction wheel balance PID|    |
-| 4/10/22 | Final CAD assembly of 1U CubeSat will all componets |    |
-| 4/10/22 | Prototype CAD assembly of Gimbal testbed with all componets |    |
+| 4/10/22 | Final CAD assembly of 1U CubeSat  |    |
+| 4/10/22 | Prototype CAD assembly of gimbal testbed |    |
 | 3/17/22 | 3D Print final 1U CubeSat and assemble  |    | 
 | 3/17/22 | 3D Print final gimbal and assemble  |    |
 | 4/17/22 | 1U CubeSat mounted in Gimbal |    |
