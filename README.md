@@ -1,4 +1,5 @@
-# CubeSat_Attitude_Control
+# CubeSat Attitude Control Testbed
+### Goals
 Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be acessed through a website where anyone can upload code for tesing their control algorithm and view a live stream of their controls algorithm on hardware in real time.
 
 ---
