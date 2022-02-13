@@ -1,7 +1,7 @@
 # Gimbal test bed stand for CubeSat Hardware
 
 ## Goals
-The goal of the gimbal is to design and build a system that a 1U CubeSat mounts inside and provide free rotations in 6 degrees of freedom. This test stand gimbal will allow for the 1U CubeSat to freely rotate in all 6 DoF for testing the attitude control using 3 reaction wheels.
+The goal of the gimbal is to design and build a system that a 1U CubeSat mounts inside and provide free rotations in 3 degrees of freedom. This test stand gimbal will allow for the 1U CubeSat to freely rotate in all 3 DoF for testing the attitude control using 3 reaction wheels.
 
 
 ## To-Do
