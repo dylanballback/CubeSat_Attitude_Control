@@ -63,5 +63,5 @@ Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be 
 | PLA | 3D printer material | [Link](https://www.amazon.com/HATCHBOX-3D-Filament-Dimensional-Accuracy/dp/B00J0ECR5I/ref=sr_1_6?crid=22M7AM47VNUVS&keywords=pla&qid=1644781036&sprefix=pla%2Caps%2C127&sr=8-6) | 1 | $22 | $22
 | Low Friction Bearings | Gimbal bearings | [Link](https://www.amazon.com/s?k=Low+Friction+Bearings&rh=n%3A16410991&ref=nb_sb_noss) | 10 | $1 | $10
 | Batteries | 18650 cells | [Link](https://www.18650batterystore.com/) | 6 | $5 | $30
-| Battery Management System | protetion of batteries | Custom | 1 | $15 | $15
+| Battery Management System | Protect batteries | Custom | 1 | $15 | $15
 | | | | | | $172
