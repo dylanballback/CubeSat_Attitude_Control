@@ -70,3 +70,14 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 
 ---
+
+
+### 2/12/22
+- Continued to work on Tuning PID code. There are issues with mapping pwm values.
+
+
+---
+
+
+### 2/13/22
+- Worked on ploting PID output data and current angle over time in serial plotter to help with tuning PID.

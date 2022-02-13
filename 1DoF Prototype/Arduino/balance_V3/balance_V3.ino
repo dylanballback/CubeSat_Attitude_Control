@@ -38,7 +38,7 @@ uint8_t i2cData[14]; // Buffer for I2C data
 //---------------------------------------- PID Vars START -------------------------------------------------------
 // PID Code Refrences (https://www.teachmemicro.com/arduino-pid-control-tutorial/)
 //PID constants 
-double kp = 25;
+double kp = 105;
 double ki = 0;
 double kd = 0;
 
@@ -51,9 +51,8 @@ double cumError, rateError;
 double map_out;
 double map_pwm_out;
 double max_Error;
+double min_Error;
 
-setPoint = 0;  //Set point at zero degrees
-max_Error = 0; //Set max_error at 0
 //---------------------------------------- PID Vars END -----------------------------------------------------------
 
 
@@ -131,6 +130,10 @@ void setup() {
   compAngleX = roll;
   compAngleY = pitch;
 //------------------------------------------------ Kalman Filter END --------------------------------------------------------
+  max_Error = 0; //Set max_error at 0
+  setPoint = 0;  //Set point at zero degrees
+  
+
 }
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -146,31 +149,43 @@ void setup() {
 void loop() {
   
   double x_angle = - kalman();
-  Serial.print("x_angle: ");
-  Serial.print(x_angle);
-  Serial.print("    "); 
+  //Serial.print("x_angle: ");
+  //Serial.print(x_angle);
+  //Serial.print("    "); 
 
   
   
   if (x_angle > 1){
     dir = 0; //CCW
-    Serial.print("dir: ");
-    Serial.print("CW");
-    Serial.print("    ");
+    //Serial.print("dir: ");
+    //Serial.print("CW");
+    //Serial.print("    ");
   }
   else if (x_angle < 0){
     dir = 1; //CW
-    Serial.print("dir: ");
-    Serial.print("CCW");
-    Serial.print("    ");
+    //Serial.print("dir: ");
+    //Serial.print("CCW");
+    //Serial.print("    ");
   }
  
   input = x_angle;                //read from rotary encoder connected to A0
   output = computePID(input);
   delay(100);
-  Serial.print("output: ");
-  Serial.print(output);
-  Serial.print("\n");
+  //Serial.print("\n");
+  //Serial.print("angle:");
+  //Serial.println(x_angle); //Print x-angle plot over time
+  //Serial.print("");
+  Serial.print("P:");
+  Serial.print(error);
+  Serial.print(",");
+  Serial.print("D:");
+  Serial.print(rateError);
+  Serial.print(",");
+  Serial.print("zero:");
+  Serial.print(setPoint);
+  Serial.print(",");
+  Serial.print("pwm:");
+  Serial.println(map_out);
   
   driveMotor(map_pwm_out, dir);
   
@@ -289,42 +304,53 @@ double computePID(double inp){
         elapsedTime = (double)(currentTime - previousTime);        //compute time elapsed from previous computation
         
         error = setPoint - inp;                                // determine error
-        //Serial.print("error: ");
+        //Serial.print("P:");
         //Serial.print(error);
-        //Serial.print("               ");
+        //Serial.print(" ");
         cumError += error * elapsedTime;                // compute integral
-        //Serial.print("cumError: ");
+        //Serial.print("I:");
         //Serial.print(cumError);
-        //Serial.print("               ");
+        //Serial.print(" ");
         rateError = (error - lastError)/elapsedTime;   // compute derivative
-        //Serial.print("rateError: ");
+        //Serial.print("D:");
         //Serial.print(rateError);
-        //Serial.print("               ");
+        //Serial.print(" ");
         double out = kp*error + ki*cumError + kd*rateError;                //PID output               
-        Serial.print("PID_out: ");
-        Serial.print(out);
-        Serial.print("       ");
+        //Serial.print("PID_out:");
+        //Serial.print(out);
+        //Serial.print(" ");
         lastError = error;                                //remember current error
         previousTime = currentTime;                       //remember current time
         
         if (inp > 33.50){
-          max_Error = -out;
+          min_Error = out;
         }
-        Serial.print("max_Error: ");
-        Serial.print(max_Error);
-        Serial.print("    ");
-       
+        else if(inp < -34){
+          max_Error = out;
+        }
+          
+        
+        //Serial.print("max_Error: ");
+        //Serial.print(max_Error);
+        //Serial.print("    ");
+        //Serial.print("min_Error: ");
+        //Serial.print(min_Error);
+        //Serial.print("    ");
         
         //Maping the PID output from its range of 0 to maximum cumError to 0 to 400
         //Max PWM value motor can recive is 400
-        map_out = map(out, 0, max_Error, 0, 400);
+        map_out = map(out, min_Error, max_Error, 0, 400);
+        //Serial.print("map_out:");
+        //Serial.print(map_out);
+        //Serial.print(" ");
+        //if(map_out < 0){
+        //  map_out = - map_out;
+        //}
         
         //Because motor PWM signal is 400=stopped and 0=full speed
         //Flip it to be 0=stopped and 400=full speed
-        map_pwm_out = map(map_out, 0, 400, 400, 0);
-        Serial.print("map_pwm_out: ");
-        Serial.print(map_pwm_out);
-        Serial.print("    ");
+        map_pwm_out = map(map_out, 0, 400, 390, 0);
+      
 
         return map_pwm_out;  //have function return the mapped PID output
 }
