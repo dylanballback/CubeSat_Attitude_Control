@@ -5,6 +5,7 @@ The goal is to develop a PID control algorithum that will allow for the 1U CubeS
 
 ## To-Do
 | Declared | To-Do | Completed |
+--- | --- | ---
 | 2/8/22 | Develop and write functions for Arduino to read IMU data and control motor |
 | 2/8/22 | Develop and write the Arduino function that can send/recive data to the Raspberry Pi |
 | 2/8/22 | Develop and write the Raspberry Pi function that can send/recive data from the Arduino |
