@@ -53,11 +53,15 @@ Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be 
 ---
 
 # Budget
-| Item | Description | Link | Quantity | Cost/Item |
---- | --- | --- | --- | ---
-| BLDC Motor | Reaction wheel motor | [Link](https://www.ebay.com/itm/264321073124) | 3 | $20
-| MPU 6050 | IMU Sensor | [Link](https://www.amazon.com/HiLetgo-MPU-6050-Accelerometer-Gyroscope-Converter/dp/B01DK83ZYQ?th=1) | 1 | $6
-| Photoresistor | Mock "Solar Sensor" | [Link](https://www.adafruit.com/product/161) | 6 | $0.95
-| Raspberry Pi Zero 2 W | Mini Computer | [Link](https://www.canakit.com/raspberry-pi-zero-2-w.html) | 1 | $15
-| Arduino Nano | Microcontroller | [Link](https://www.amazon.com/ELEGOO-Arduino-ATmega328P-Without-Compatible/dp/B0713XK923) | 1 | $8
-| PLA | 3D printer material | [Link](https://www.amazon.com/HATCHBOX-3D-Filament-Dimensional-Accuracy/dp/B00J0ECR5I/ref=sr_1_6?crid=22M7AM47VNUVS&keywords=pla&qid=1644781036&sprefix=pla%2Caps%2C127&sr=8-6) | 1 | $22
+| Item | Description | Link | Quantity | Cost/Item | Total Cost
+--- | --- | --- | --- | --- | ---
+| BLDC Motor | Reaction wheel motor | [Link](https://www.ebay.com/itm/264321073124) | 3 | $20 | $60
+| MPU 6050 | IMU Sensor | [Link](https://www.amazon.com/HiLetgo-MPU-6050-Accelerometer-Gyroscope-Converter/dp/B01DK83ZYQ?th=1) | 1 | $6 | $6
+| Photoresistor | Mock "Solar Sensor" | [Link](https://www.adafruit.com/product/161) | 6 | $1 | $6
+| Raspberry Pi Zero 2 W | Mini Computer | [Link](https://www.canakit.com/raspberry-pi-zero-2-w.html) | 1 | $15 | $15
+| Arduino Nano | Microcontroller | [Link](https://www.amazon.com/ELEGOO-Arduino-ATmega328P-Without-Compatible/dp/B0713XK923) | 1 | $8 | $8
+| PLA | 3D printer material | [Link](https://www.amazon.com/HATCHBOX-3D-Filament-Dimensional-Accuracy/dp/B00J0ECR5I/ref=sr_1_6?crid=22M7AM47VNUVS&keywords=pla&qid=1644781036&sprefix=pla%2Caps%2C127&sr=8-6) | 1 | $22 | $22
+| Low Friction Bearings | Gimbal bearings | [Link](https://www.amazon.com/s?k=Low+Friction+Bearings&rh=n%3A16410991&ref=nb_sb_noss) | 10 | $1 | $10
+| Batteries | 18650 cells | [Link](https://www.18650batterystore.com/) | 6 | $5 | $30
+| Battery Management System | protetion of batteries | Custom | 1 | $15 | $15
+| | | | | | $172
