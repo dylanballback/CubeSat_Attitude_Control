@@ -80,4 +80,4 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 
 ### 2/13/22
-- Worked on ploting PID output data and current angle over time in serial plotter to help with tuning PID.
+- Worked on ploting PID output data and current angle over time in serial plotter to help with tuning PID. ([Untuned Balance PID code V4](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V4/balance_V4.ino))
