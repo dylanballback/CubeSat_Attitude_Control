@@ -16,15 +16,18 @@ Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be 
 ### CubeSat Hardware
 | Milestone | Completed |
 | --- | ---
-| CAD Assembly of 1U CubeSat with 3 Reaction wheels, IMU, Arduino, Raspberry Pi Zero, and Battery |    
-| 3D print and assemble 1U CubeSat will all componets mounted inside |    
+| Prototype CAD Assembly of 1U CubeSat with 3 Reaction wheels, IMU, Arduino, Raspberry Pi Zero, and Battery |    
+| 3D print and assemble prototype 1U CubeSat will all componets mounted inside |
+| Final CAD Assembly of 1U CubeSat with 3 Reaction wheels, IMU, Arduino, Raspberry Pi Zero, and Battery |
+| 3D print and assemble final 1U CubeSat will all componets mounted inside |    
 
 ### Gimbal/Test Stand
 | Milestone | Completed |
 | --- | --- 
-| CAD Assembly of all three gimbal rings with mounting mounts to eachother and to the CubeSat |    
-| 3D print and assemble all 3 gimbal rings |   
-| Attaching Gimbal test stand to 80/20 mounting frame |   
+| Prototype CAD Assembly of all three gimbal rings with mounting mounts to eachother and to the CubeSat |    
+| 3D print prototype and assemble all 3 gimbal rings |   
+| Attaching Gimbal test stand to 80/20 mounting frame |
+| Final CAD Assembly of all three gimbal rings with mounting mounts to eachother and to the CubeSat |  
 
 ### Software
 | Milestone | Completed |
@@ -37,17 +40,48 @@ Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be 
 ### Integration 
 | Milestone | Completed |
 | --- | ---
-| Attaching 1U CubeSat into gimbal rings  | 
+| Attaching 1U CubeSat into gimbal rings  |
+| Uploading code through website successfully  |
+
+### Research Paper 
+| Milestone | Completed |
+| --- | ---
+| Create Outline |
+| Complete Rough Draft |
+| Complete Final Version |
+| Publish Research Paper |
+ 
+
 
 ---
 
 # Schedule
-| Due By Date | To-Do | Completed | Class Assignment
+| Due By Date | Milestone | Completed | Class Assignment
 --- | --- | --- | ---
-| 2/13/22 | ~~Project Prosal~~ | 2/13/22 | Yes
+| 2/13/22 | ~~Project Proposal~~ | 2/13/22 | Yes
+| 2/27/22 | 1 DoF reaction wheel balance with PID |   |
+| 2/27/22 | Prototype CAD assembly of 1U CubeSat will all componets |   |
+| 2/27/22 | Prototype CAD assembly of Gimbal testbed with all componets |   |
+| 2/27/22 | Research Paper Outline | 
 | 2/27/22 | Research Reduction |   | Yes
+| 3/14/22 | 3D Print prototype 1U CubeSat and assemble  |    | 
+| 3/14/22 | 3D Print prototype gimbal and assemble  |    |
+| 3/14/22 | All Arduino functions complete and rigiously tested  |    |
+| 3/14/22 | 2 DoF reaction wheel balance PID  |    |
+| 3/21/22 | All Raspberry Pi functions complete and rigiously tested |    |
+| 3/21/22 | Reserch paper rough draft |    |
 | 3/21/22 | Project Update |    | Yes
+| 4/10/22 | 3 DoF reaction wheel balance PID|    |
+| 4/10/22 | Final CAD assembly of 1U CubeSat will all componets |    |
+| 4/10/22 | Prototype CAD assembly of Gimbal testbed with all componets |    |
+| 3/17/22 | 3D Print final 1U CubeSat and assemble  |    | 
+| 3/17/22 | 3D Print final gimbal and assemble  |    |
+| 4/17/22 | 1U CubeSat mounted in Gimbal |    |
+| 4/24/22 | Wireless code upload |    |
+| 4/24/22 | Research Paper Final Version |    |
+| 5/1/22 | 3 DoF Attitude PID Controller |   | 
 | 5/1/22 | Project Presentation |   | Yes
+| 5/2/22 | Publish Research Paper |   | 
 | 5/2/22 | Project Technical Paper |   | Yes
 
 ---
