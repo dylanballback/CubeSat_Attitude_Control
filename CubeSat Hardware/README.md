@@ -7,6 +7,7 @@ The overall goal is to build a 1U CubeSat with 3 reaction wheels, one mounted in
 ## To-Do
 ### Mechanical 
 - CubeSat CAD
+
 | Declared | To-Do | Completed |
 --- | --- | ---
 | 2/8/22 | Design basic 1U CubeSat frame for tesing different connection methods to the gimbal |
@@ -18,6 +19,7 @@ The overall goal is to build a 1U CubeSat with 3 reaction wheels, one mounted in
 
 
 - CubeSat 3D Print
+
 | Declared | To-Do | Completed |
 --- | --- | ---
 | 2/8/22 | 3D print basic 1U CubeSat frame for tesing different connection methods to the gimbal |
@@ -31,6 +33,7 @@ The overall goal is to build a 1U CubeSat with 3 reaction wheels, one mounted in
 
 ### Electrical
 - Battery
+
 | Declared | To-Do | Completed |
 --- | --- | ---
 | 2/8/22 | Calculate how much current the motors will draw during operation to determine the C rating of the battery required and capacity required for desired runtime duration. |
@@ -40,6 +43,7 @@ The overall goal is to build a 1U CubeSat with 3 reaction wheels, one mounted in
 
 
 - Motherboard
+
 | Declared | To-Do | Completed |
 --- | --- | ---
 | 2/8/22 | Decide weather an Arduino nano should be used paired with a raspberry pi zero w or can just the raspberrry pi support the control of all the required systems. |
