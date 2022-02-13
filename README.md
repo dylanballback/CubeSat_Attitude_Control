@@ -1,9 +1,7 @@
 # CubeSat_Attitude_Control
 Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be acessed through a website where anyone can upload code for tesing their control algorithm and view a live stream of their controls algorithm on hardware in real time.
 
-<p>
-                                                                                                                                                                                                                                                                                                                                                    
-</p>
+---
 
 ## Major Milestones
 ### Controls of Reaction Wheel
@@ -40,13 +38,7 @@ Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be 
 | --- | ---
 | Attaching 1U CubeSat into gimbal rings  | 
 
-
-
-<p>
-                                                                                                                                                                                                                                                                                                                                                    
-</p>
-
-
+---
 
 ## Schedule
 | Due By Date | To-Do | Completed | Class Assignment
@@ -57,12 +49,7 @@ Development of a 1U CubeSat Reaction Wheel Attitude Control Testbed that can be 
 | 5/1/22 | Project Presentation |   | Yes
 | 5/2/22 | Project Technical Paper |   | Yes
 
-
-
-<p>
-                                                                                                                                                                                                                                                                                                                                                    
-</p>
-
+---
 
 ## Budget
 | Declared | To-Do | Completed |
