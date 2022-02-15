@@ -60,12 +60,12 @@ void loop() {
   digitalWrite(ledsBrake,LOW);      //Red LED OFF // Brake OFF
   digitalWrite(nidecDirection,LOW); // Nidec Direction CCW
   digitalWrite(ledsDirection,LOW); //Green LED OFF // Direction CCW
-  analogWrite(nidecPWM, 0);
+  analogWrite(nidecPWM, 100);
   delay(2000);
-  digitalWrite(nidecDirection,HIGH); // Nidec Direction CW
-  digitalWrite(ledsDirection,HIGH); //Green LED ON // Direction CW
-  analogWrite(nidecPWM, 1);
-  delay(2000);
+  //digitalWrite(nidecDirection,HIGH); // Nidec Direction CW
+ // digitalWrite(ledsDirection,HIGH); //Green LED ON // Direction CW
+  //analogWrite(nidecPWM, 1);
+  //delay(2000);
   
 /*
   //Clock Wise Test
