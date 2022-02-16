@@ -37,6 +37,9 @@ float ang_velocity_right_deg = 0;
  
 const float rpm_to_radians = 0.10471975512;
 const float rad_to_deg = 57.29578;
+float previous_ang_velocity;
+float ang_accelration;
+int pwm_signal = 380;
 
 #include <Wire.h>        // IIC communication library
 #include <PWM.h>        // Require Timer1 PWM frequency of 20Khz-25Khz for Nidec 24H677 BLDC Motor (https://github.com/terryjmyers/PWM)
@@ -60,6 +63,16 @@ void setup() {
  
   // Open the serial port at 9600 bps
   Serial.begin(9600); 
+  // PWM.h Setup
+  InitTimersSafe();
+  // The Nidec 24H677 BLDC Motor requires a PWM frequency of 20KHz to 25KHz
+  bool success = SetPinFrequencySafe(nidecPWM, 20000);
+   //set the Nidec motor control pins 
+  pinMode(nidecBrake, OUTPUT);
+  pinMode(nidecDirection,OUTPUT);
+  pinMode(ledsDirection,OUTPUT);
+  pinMode(ledsBrake,OUTPUT);
+  pinMode(nidecPWM,OUTPUT);
  
   
   // Set pin states of the encoder
@@ -69,41 +82,50 @@ void setup() {
   // Every time the pin goes high, this is a pulse
   attachInterrupt(digitalPinToInterrupt(ENC_IN_RIGHT_A), right_wheel_pulse, RISING);
 
-   driveMotor(200,0);
+  //driveMotor(0,1);
 }
  
 void loop() {
   // Record the time
   currentMillis = millis();
- 
+  
+  
+  
   // If one second has passed, print the number of pulses
   if (currentMillis - previousMillis > interval) {
- 
+    driveMotor(pwm_signal, 1);
+    pwm_signal = pwm_signal-15;
     previousMillis = currentMillis;
- 
+    
     // Calculate revolutions per minute
     rpm_right = (float)(right_wheel_pulse_count * 60 / ENC_COUNT_REV);
     ang_velocity_right = rpm_right * rpm_to_radians;   
     ang_velocity_right_deg = ang_velocity_right * rad_to_deg;
+    ang_accelration = (ang_velocity_right - previous_ang_velocity) / 1;
      
-    Serial.print("Pulses: ");
-    Serial.print(right_wheel_pulse_count);
-    Serial.print("\t");
-    Serial.print("RPM: ");
-    Serial.print(rpm_right);
-    Serial.print("\t");
-    Serial.print("Angular Velocity: ");
-    Serial.print(ang_velocity_right);
-    Serial.print("\t");
-    Serial.print("rad/s");
-    Serial.print("\t");
-    Serial.print(ang_velocity_right_deg);
-    Serial.println("deg/s");
+    //Serial.print("Pulses:");
+    //Serial.print(right_wheel_pulse_count);
+    //Serial.print("   ");
+    
+    //Serial.print("   ");
     //Serial.println();
  
     right_wheel_pulse_count = 0;
-   
+    previous_ang_velocity = ang_velocity_right;
+
   }
+  Serial.print("RPM:");
+  Serial.print(rpm_right);
+  Serial.print("   ");
+  Serial.print("AngularVelocity:");
+  Serial.print(ang_velocity_right);
+  Serial.print("   ");
+  Serial.print("AngularAccleration:");
+  Serial.println(ang_accelration);
+  
+  Serial.print("pwm_signal:");
+  Serial.print(pwm_signal);
+  Serial.print("   ");
 }
  
 // Increment the number of pulses by 1

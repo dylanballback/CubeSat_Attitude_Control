@@ -87,4 +87,19 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 ### 2/14/22 
 
-- Working on different PID Arduino code, trying variety of differnt methods. Version 5 and 6. I think I also burnt out my motor controller :(
+- Working on different PID Arduino code, trying variety of differnt methods comparing if the results of my version of the PID code matches the output of a PID code using the Arduino PID package, Version 5, and Version 6.  ([Untuned Balance PID code V5](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V5/balance_V5.ino))  ([Untuned Balance PID code V6](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V6/balance_V6.ino))
+
+
+
+### 2/15/22
+
+- Working on derivating the equations of motion for a 1 degree of freedom system, and attemping to create a matlab simualtion to help with tunning the PID. 
+- Increased the outter diameter of the reaction wheel version 1. I discovered that the most efficent design of the reaction wheel is to achive the largest moment of inertia with the lowest mass. This can be achived through increasing the diameter of the wheel. 
+
+
+### 2/16/22
+
+- I discovered that limits have to be set for the integral term in the PID along with the overall PID output. Before I was just constraining the overall PID output to be within range of my motor, but the I (integral term) was not constrained. [Youtube Source](https://www.youtube.com/watch?v=NVLXCwc8HzM) 
+- Rewrote PID balance to include function to set limits of both the I (integral term) and the overall PID output. [Untuned Balance PID code V7](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V7/balance_V7.ino))
+
+
