@@ -98,7 +98,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 ### 2/15/22
 
-- Working on derivating the equations of motion for a 1 degree of freedom system, and attemping to create a matlab simualtion to help with tunning the PID. [EOM for 1DoF](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Notes/1DOF%20EOM%20Feb%2015%2C%202022.pdf)
+- Working on derivating the equations of motion for a 1 degree of freedom system, and attemping to create a matlab simualtion to help with tunning the PID. ([EOM for 1DoF](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Notes/1DOF%20EOM%20Feb%2015%2C%202022.pdf))
 - Increased the outter diameter of the reaction wheel version 1. I discovered that the most efficent design of the reaction wheel is to achive the largest moment of inertia with the lowest mass. This can be achived through increasing the diameter of the wheel.
 -Modified CAD of 1DoF base to allow for forces to be applied on bearing ring without preventing the rotation of the bearing. Additional, added a small stop for both side of the base.
 <p style="text-align:center; float="left">
