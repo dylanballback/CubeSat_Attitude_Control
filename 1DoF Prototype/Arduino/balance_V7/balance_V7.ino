@@ -2,6 +2,7 @@
 #include <Wire.h>        // IIC communication library
 #include <PWM.h>        // Require Timer1 PWM frequency of 20Khz-25Khz for Nidec 24H677 BLDC Motor
 
+//Cite http://brettbeauregard.com/blog/2011/04/improving-the-beginner%E2%80%99s-pid-reset-windup/)
 
 //---------------------------------------- Nidec 24H677H010 BLDC Motor Vars START ------------------------------------
 const int nidecBrake = 8;      // Brake
@@ -37,9 +38,24 @@ uint8_t i2cData[14]; // Buffer for I2C data
 
 //---------------------------------------- PID Vars START -------------------------------------------------------
 //PID constants
-double kp = 2;
-double ki = 0;
-double kd = 0;
+double kp = 0;
+double ki = .1;
+double kd = 1;
+/*
+ * I had a bit of success with very low I values with some dampening, because the integral leads more directly to acceleration and thus torque, but I think there are some problems with the PID implementation
+ * If my understanding of your code is correct, you're using the location of the wheel to set the direction of the motor, the direction of motion for a PID is supposed to be set by the sign of the output
+ * My recommendation would be to have your motor driving function take in a value where 0 is stationary, and the direction is the sign
+ * Not sure how much that bit will help immedeately, but I did notice some weird behavior, and that might be the cause
+ * The second thing is you'll probably want to have the output of the PID control the acceleration of the wheel, and thus torque, rather than the velocity
+ * In the current implementation, without an integral component, the wheel will have no torque applied to it when held off the stationary point, as a constant angular velocity applies no torque (or very little)
+ * 
+ * Lastly, be careful of the accelerometer calibration of the mpu6050s, it may not be reporting a correct angle. You might just want to use one axis of the accelerometer, record its highest value and use trig to compute an angle off of it
+ * 
+ * Hopefully some of this is helpful, I'm not an expert though
+ * 
+ * Good luck,
+ * -Ryan
+ */
  
 unsigned long currentTime, previousTime;
 double elapsedTime;
@@ -47,8 +63,8 @@ double error;
 double lastError;
 double Input, Output, Setpoint;
 double i, d;
-double clampLimit, lastclampLimit;
-double outMin, outMax;
+double outMin = 0;
+double outMax = 390;
 //---------------------------------------- PID Vars END -----------------------------------------------------------
 
 
@@ -127,12 +143,10 @@ void setup() {
 //------------------------------------------------ Kalman Filter END --------------------------------------------------------
   
   Setpoint = 0;                          //set point at zero degrees
-  
 }
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Setup Function END %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -142,16 +156,21 @@ void loop() {
   Serial.print("SetPoint:");
   Serial.print(Setpoint);
   Serial.print("   ");
-
+  //Serial.print("outMin:");
+  //Serial.print(outMin);
+  //Serial.print("   ");
+  //Serial.print("outMax:");
+  //Serial.print(outMax);
+  //Serial.print("   ");
   
   double x_angle = kalman();
   Serial.print("x_angle:");
-  Serial.print(x_angle);
-  Serial.print("   ");
+  Serial.println(x_angle);
+  //Serial.print("   ");
 
   
   Input = x_angle;
-  if (Input < 0){
+  if (Input > 0){
     Input = -Input;
   }
   //Serial.print("Input:");
@@ -171,23 +190,23 @@ void loop() {
     //Serial.print("CCW");
     //Serial.print("    ");
   }
-
+  
   //Calculate the PID output
   Output = computePID(Input);
+  
+  
+
   
   
   //This is just fliping the PWM value from 0 to 390 ---> to 390 to 0
   // This is to make the PWM value make more sense while graphing
   //Whereas 0 = stopped and 390 = full speed
   double pwm = map(Output, 0, 390, 390, 0);
-  Serial.print("Output:");
-  Serial.println(Output);
-  //Serial.print("   ");
   //Serial.print("pwm:");
   //Serial.println(pwm);
   //Serial.print("   "); 
   //Serial.print("\n");
-
+  
   //This is the comand to drive the motor
   driveMotor(pwm, dir);
   
@@ -300,42 +319,44 @@ void driveMotor(float pwm,int dir){
 
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Compute PID Function START $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-double computePID(double inp){     
-        currentTime = millis();                //get current time
-        elapsedTime = (double)(currentTime - previousTime);        //compute time elapsed from previous computation
-        
-        error = Setpoint - inp;    // determine error
-
-        i += error * elapsedTime;  // compute integral
-        if(i> outMax) i=outMax;
-        else if(i< outMin) i=outMin;
-        
-        d = (error - lastError)/elapsedTime;   // compute derivative
-
-        double Output = kp*error + ki*i + kd*d;  //PID output               
-        if(Output > outMax) Output = outMax;
-        else if(Output < outMin) Output = outMin;
-
-        
-        lastError = error;            //remember current error
-        previousTime = currentTime;   //remember current time
-                
-        return Output;   //have function return the PID output
+double computePID(double inp){
+  currentTime = millis();                //get current time
+  elapsedTime = (double)(currentTime - previousTime);        //compute time elapsed from previous computation
+  
+  error = Setpoint - inp;    // determine error
+  //Serial.print("error:");
+  //Serial.print(error);
+  //Serial.print("   ");
+  i += error * elapsedTime;  // compute integral
+  if(i> outMax){
+    i=outMax;
+  }
+  else if(i< outMin){
+    i=outMin;
+  }
+  //Serial.print("i:");
+  //Serial.print(i);
+  //Serial.print("   ");
+  d = (error - lastError)/elapsedTime;   // compute derivative
+  //Serial.print("d:");
+  //Serial.print(d);
+  //Serial.print("   ");
+  double Output = kp*error + ki*i + kd*d;  //PID output               
+  if(Output > outMax){ 
+    Output = outMax;
+  }
+  else if(Output < outMin){
+    Output = outMin;
+  }
+  //Serial.print("Output:");
+ // Serial.print(Output);
+  //Serial.print("   ");
+  lastError = error;            //remember current error
+  previousTime = currentTime;   //remember current time
+          
+  return Output;   //have function return the PID output
 }
 
 
-
-void SetOutputLimits(double Min, double Max)
-{
-   if(Min > Max) return;
-   outMin = Min;
-   outMax = Max;
-   
-   if(Output > outMax) Output = outMax;
-   else if(Output < outMin) Output = outMin;
-   
-   if(i> outMax) i= outMax;
-   else if(i< outMin) i= outMin;
-}
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Compute PID Function END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$

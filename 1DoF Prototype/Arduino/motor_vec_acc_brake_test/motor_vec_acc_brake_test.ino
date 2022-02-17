@@ -115,17 +115,17 @@ void loop() {
 
   }
   Serial.print("RPM:");
-  Serial.print(rpm_right);
-  Serial.print("   ");
-  Serial.print("AngularVelocity:");
-  Serial.print(ang_velocity_right);
-  Serial.print("   ");
-  Serial.print("AngularAccleration:");
-  Serial.println(ang_accelration);
+  Serial.println(rpm_right);
+  //Serial.print("   ");
+  //Serial.print("AngularVelocity:");
+  //Serial.println(ang_velocity_right);
+  //Serial.print("   ");
+  //Serial.print("AngularAccleration:");
+  //Serial.println(ang_accelration);
   
-  Serial.print("pwm_signal:");
-  Serial.print(pwm_signal);
-  Serial.print("   ");
+  //Serial.print("pwm_signal:");
+  //Serial.print(pwm_signal);
+  //Serial.print("   ");
 }
  
 // Increment the number of pulses by 1
