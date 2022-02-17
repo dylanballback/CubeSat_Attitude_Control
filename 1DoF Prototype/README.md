@@ -103,10 +103,10 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 -Modified CAD of 1DoF base to allow for forces to be applied on bearing ring without preventing the rotation of the bearing. Additional, added a small stop for both side of the base.
 <p style="text-align:center; float="left">
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/reaction_wheel_V3.png" width="300" style="float: left">
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_front.png" width="300" style="float: left" >
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_front.png" width="400" style="float: left" >
 </p>
 <p style="text-align:center; float="right">   
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_side.png" width="400" style="float: right">
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_side.png" width="300" style="float: right">
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_back.png" width="400" style="float: right">
 </p>    
 
