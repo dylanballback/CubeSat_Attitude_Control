@@ -95,6 +95,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 - Working on derivating the equations of motion for a 1 degree of freedom system, and attemping to create a matlab simualtion to help with tunning the PID. 
 - Increased the outter diameter of the reaction wheel version 1. I discovered that the most efficent design of the reaction wheel is to achive the largest moment of inertia with the lowest mass. This can be achived through increasing the diameter of the wheel. 
+- Worked on deriving equations of motion for a one degree of freedom system. [EOM for 1DoF](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Notes/1DOF%20EOM%20Feb%2015%2C%202022.pdf)
 
 
 ### 2/16/22
