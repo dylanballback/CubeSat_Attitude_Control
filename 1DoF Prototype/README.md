@@ -106,8 +106,8 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_front.png" width="300" style="float: left" >
 </p>
 <p style="text-align:center; float="right">   
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_side.png" width="300" style="float: right">
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_back.png" width="300" style="float: right">
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_side.png" width="400" style="float: right">
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_back.png" width="400" style="float: right">
 </p>    
 
 
