@@ -113,8 +113,8 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 ### 2/16/22
 
-- I discovered that limits have to be set for the integral term in the PID along with the overall PID output. Before I was just constraining the overall PID output to be within range of my motor, but the I (integral term) was not constrained. [Youtube Source](https://www.youtube.com/watch?v=NVLXCwc8HzM) 
-- Rewrote PID balance code to include function to set limits of both the I (integral term) and the overall PID output. [Untuned Balance PID code V7](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V7/balance_V7.ino))
+- I discovered that limits have to be set for the integral term in the PID along with the overall PID output. Before I was just constraining the overall PID output to be within range of my motor, but the I (integral term) was not constrained. ([Youtube Source](https://www.youtube.com/watch?v=NVLXCwc8HzM)) 
+- Rewrote PID balance code to include function to set limits of both the I (integral term) and the overall PID output. ([Untuned Balance PID code V7](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V7/balance_V7.ino))
 - Working on collecting individual motor data for both at 12V and 24V and with no load, and the reaction wheel load.
-- Rewrote PID balance code so that the change in direction of the motor is based off the PID output itself, previously I had the direction flip based off the angle. [Untuned Balance PID code V8](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V8/balance_V7.ino))
+- Rewrote PID balance code so that the change in direction of the motor is based off the PID output itself, previously I had the direction flip based off the angle. ([Untuned Balance PID code V8](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V8/balance_V7.ino))
 
