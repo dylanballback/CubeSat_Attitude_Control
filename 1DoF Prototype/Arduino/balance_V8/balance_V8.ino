@@ -12,6 +12,7 @@ const int ledsBrake = 5;       // Red LED direction indicators
 const int nidecPWM = 9;        // Nidec Motor PWM
 int brake_trigger = 1;         //Brake is ON
 int dir = 0;                   //Direction set to CCW
+double pwm = 400;              // Set pwm value to 400 = motor stopped
 //---------------------------------------- Nidec 24H677H010 BLDC Motor Vars END --------------------------------------
 
 
@@ -38,9 +39,9 @@ uint8_t i2cData[14]; // Buffer for I2C data
 
 //---------------------------------------- PID Vars START -------------------------------------------------------
 //PID constants
-double kp = 0;
-double ki = .1;
-double kd = 1;
+double kp = 10;
+double ki = 0;
+double kd = 0;
 /*
  * I had a bit of success with very low I values with some dampening, because the integral leads more directly to acceleration and thus torque, but I think there are some problems with the PID implementation
  * If my understanding of your code is correct, you're using the location of the wheel to set the direction of the motor, the direction of motion for a PID is supposed to be set by the sign of the output
@@ -63,7 +64,7 @@ double error;
 double lastError;
 double Input, Output, Setpoint;
 double i, d;
-double outMin = 0;
+double outMin = -390;
 double outMax = 390;
 //---------------------------------------- PID Vars END -----------------------------------------------------------
 
@@ -170,41 +171,41 @@ void loop() {
 
   
   Input = x_angle;
-  if (Input > 0){
-    Input = -Input;
-  }
   //Serial.print("Input:");
   //Serial.print(Input);
   //Serial.print("   ");
   
-  //Switches the direction of the wheel based on angle
-  if (x_angle > 1){
+
+  
+  //Calculate the PID output
+  Output = computePID(Input);
+  Serial.print("Output:");
+  Serial.print(Output);
+  Serial.print("   ");
+  
+    //Switches the direction of the wheel based on sign of PID output
+  if (Output > 1){
     dir = 0; //CCW
+    //This is just fliping the PWM value from 0 to 390 ---> to 390 to 0
+    //Whereas 0 = stopped and 390 = full speed
+    pwm = map(Output, 0, 390, 390, 0);
     //Serial.print("dir: ");
     //Serial.print("CW");
     //Serial.print("    ");
   }
-  else if (x_angle < 0){
+  else if (Output < 0){
     dir = 1; //CW
+    //This is just fliping the PWM value from -390 to 0 ---> to 390 to 0
+    //Whereas 0 = stopped and 390 = full speed
+    pwm = map(Output, 0, -390, 390, 0);
     //Serial.print("dir: ");
     //Serial.print("CCW");
     //Serial.print("    ");
   }
   
-  //Calculate the PID output
-  Output = computePID(Input);
-  
-  
-
-  
-  
-  //This is just fliping the PWM value from 0 to 390 ---> to 390 to 0
-  // This is to make the PWM value make more sense while graphing
-  //Whereas 0 = stopped and 390 = full speed
-  double pwm = map(Output, 0, 390, 390, 0);
-  //Serial.print("pwm:");
-  //Serial.println(pwm);
-  //Serial.print("   "); 
+  Serial.print("pwm:");
+  Serial.print(pwm);
+  Serial.print("   "); 
   //Serial.print("\n");
   
   //This is the comand to drive the motor

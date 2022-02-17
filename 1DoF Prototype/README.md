@@ -12,9 +12,14 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 | 2/8/22 | ~~Connect Motor and IMU to Arduino to test basic functions.~~ | 2/9/22
 | 2/8/22 | ~~Attempt to get PID Code to balance the reaction wheel.~~ | 2/10/22
 | 2/11/22 | ~~Get working untuned PID Code for the reaction wheel.~~ | 2/11/22
-| 2/11/22 | Research equations of motions for 1DoF. Calculate reaction wheel required moment of inertia. |
+| 2/11/22 | ~~Research equations of motions for 1DoF. Calculate reaction wheel required moment of inertia.~~ | 2/15/22
 | 2/11/22 | Research and attempt differnet methods for tuning PID controller. |
 | 2/11/22 | Achive 1DoF Reaction Wheel Balanced with tuned PID controller. |
+| 2/16/22 | Write function to read IMU angle through use of Z axis for more accurate readings. |
+| 2/16/22 | Write function for PID to output reaction wheel acceleration. |
+| 2/16/22 | Write function for motor to reach desired acceleration recieved from PID function. |
+
+
 
 
 
@@ -93,15 +98,21 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 ### 2/15/22
 
-- Working on derivating the equations of motion for a 1 degree of freedom system, and attemping to create a matlab simualtion to help with tunning the PID. 
-- Increased the outter diameter of the reaction wheel version 1. I discovered that the most efficent design of the reaction wheel is to achive the largest moment of inertia with the lowest mass. This can be achived through increasing the diameter of the wheel. 
-- Worked on deriving equations of motion for a one degree of freedom system. [EOM for 1DoF](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Notes/1DOF%20EOM%20Feb%2015%2C%202022.pdf)
+- Working on derivating the equations of motion for a 1 degree of freedom system, and attemping to create a matlab simualtion to help with tunning the PID. [EOM for 1DoF](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Notes/1DOF%20EOM%20Feb%2015%2C%202022.pdf)
+- Increased the outter diameter of the reaction wheel version 1. I discovered that the most efficent design of the reaction wheel is to achive the largest moment of inertia with the lowest mass. This can be achived through increasing the diameter of the wheel.
+-Modified CAD of 1DoF base to allow for forces to be applied on bearing ring without preventing the rotation of the bearing. Additional, added a small stop for both side of the base.
+<p style="text-align:center; float="left">
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/reaction_wheel_V3.png" width="300" style="float: left">
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_front.png" width="300" style="float: right" >
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_side.png" width="300" style="float: right">
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_back.png" width="300" style="float: right">
+    
 
 
 ### 2/16/22
 
 - I discovered that limits have to be set for the integral term in the PID along with the overall PID output. Before I was just constraining the overall PID output to be within range of my motor, but the I (integral term) was not constrained. [Youtube Source](https://www.youtube.com/watch?v=NVLXCwc8HzM) 
-- Rewrote PID balance to include function to set limits of both the I (integral term) and the overall PID output. [Untuned Balance PID code V7](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V7/balance_V7.ino))
+- Rewrote PID balance code to include function to set limits of both the I (integral term) and the overall PID output. [Untuned Balance PID code V7](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V7/balance_V7.ino))
 - Working on collecting individual motor data for both at 12V and 24V and with no load, and the reaction wheel load.
-
+-Rewrote PID balance code so that the change in direction of the motor is based off the PID output itself, previously I had the direction flip based off the angle. [Untuned Balance PID code V8](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V8/balance_V7.ino))
 
