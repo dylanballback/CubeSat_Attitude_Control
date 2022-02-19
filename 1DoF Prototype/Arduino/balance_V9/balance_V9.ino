@@ -39,10 +39,15 @@ uint8_t i2cData[14]; // Buffer for I2C data
 
 //---------------------------------------- PID Vars START -------------------------------------------------------
 //PID constants
-double kp = 10;
+double kp = 20;
 double ki = 0;
-double kd = 0;
+double kd = 15;
 
+double outMin = -800;
+double outMax = 800;
+
+double bounds = 0.3;
+int term;
  
 unsigned long currentTime, previousTime;
 double elapsedTime;
@@ -50,8 +55,7 @@ double error;
 double lastError;
 double Input, Output, Setpoint;
 double i, d;
-double outMin = -390;
-double outMax = 390;
+
 //---------------------------------------- PID Vars END -----------------------------------------------------------
 
 
@@ -140,9 +144,9 @@ void setup() {
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Loop Function START %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void loop() {
-  Serial.print("SetPoint:");
-  Serial.print(Setpoint);
-  Serial.print("   ");
+  ///Serial.print("SetPoint:");
+  //Serial.print(Setpoint);
+  //Serial.print("   ");
   //Serial.print("outMin:");
   //Serial.print(outMin);
   //Serial.print("   ");
@@ -151,49 +155,58 @@ void loop() {
   //Serial.print("   ");
   
   double x_angle = kalman();
-  Serial.print("x_angle:");
-  Serial.println(x_angle);
+  //Serial.print("x_angle:");
+  //Serial.println(x_angle);
   //Serial.print("   ");
 
   
-  Input = x_angle;
   //Serial.print("Input:");
   //Serial.print(Input);
   //Serial.print("   ");
   
+  
+  Input = x_angle;
 
   
   //Calculate the PID output
-  Output = computePID(Input);
-  Serial.print("Output:");
-  Serial.print(Output);
-  Serial.print("   ");
+  Output = computePID(Input, x_angle);
+  //Serial.print("Output:");
+  //Serial.print(Output);
+  //Serial.print("   ");
+
+  
+  
   
     //Switches the direction of the wheel based on sign of PID output
   if (Output > 1){
-    dir = 0; //CCW
+    dir = 1; //CW
     //This is just fliping the PWM value from 0 to 390 ---> to 390 to 0
     //Whereas 0 = stopped and 390 = full speed
-    pwm = map(Output, 0, 390, 390, 0);
+    pwm = map(Output, 0, outMax, 400, 0);
     //Serial.print("dir: ");
     //Serial.print("CW");
     //Serial.print("    ");
   }
   else if (Output < 0){
-    dir = 1; //CW
+    dir = 0; //CCW
     //This is just fliping the PWM value from -390 to 0 ---> to 390 to 0
     //Whereas 0 = stopped and 390 = full speed
-    pwm = map(Output, 0, -390, 390, 0);
+    pwm = map(Output, 0, outMin, 400, 0);
     //Serial.print("dir: ");
     //Serial.print("CCW");
     //Serial.print("    ");
   }
+
+
+  if (x_angle > -bounds && x_angle < bounds){
+    pwm = 400;
+  }
   
-  Serial.print("pwm:");
-  Serial.print(pwm);
-  Serial.print("   "); 
-  //Serial.print("\n");
+  Serial.print("x_angle:");
+  Serial.println(x_angle);
+  //Serial.print("   "); 
   
+
   //This is the comand to drive the motor
   driveMotor(pwm, dir);
   
@@ -306,14 +319,13 @@ void driveMotor(float pwm,int dir){
 
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Compute PID Function START $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-double computePID(double inp){
+double computePID(double inp, double x_angle){
   currentTime = millis();                //get current time
   elapsedTime = (double)(currentTime - previousTime);        //compute time elapsed from previous computation
   
   error = Setpoint - inp;    // determine error
-  //Serial.print("error:");
-  //Serial.print(error);
-  //Serial.print("   ");
+
+  
   i += error * elapsedTime;  // compute integral
   if(i> outMax){
     i=outMax;
@@ -328,16 +340,25 @@ double computePID(double inp){
   //Serial.print("d:");
   //Serial.print(d);
   //Serial.print("   ");
-  double Output = kp*error + ki*i + kd*d;  //PID output               
+  double Output = kp*error + ki*i + kd*d;  //PID output
+  if (error < 0){
+    term = -1;
+  }
+  else{
+    term = 1;
+  }
+  Output =  abs(Output-50) * 5*sqrt(abs((error/45)));
+  Output = term * Output;              
   if(Output > outMax){ 
     Output = outMax;
   }
   else if(Output < outMin){
     Output = outMin;
   }
+  
   //Serial.print("Output:");
- // Serial.print(Output);
-  //Serial.print("   ");
+  //Serial.println(Output);
+  //Serial.print("");
   lastError = error;            //remember current error
   previousTime = currentTime;   //remember current time
           
