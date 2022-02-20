@@ -28,3 +28,14 @@ The goal of the gimbal is to design and build a system that a 1U CubeSat mounts 
 | Declared | To-Do | Completed |
 --- | --- | ---
 | 2/8/22 | Figure out the best bearings for the gimbal to allow for low friction rotation |
+
+
+
+## Updates 
+
+### 2/20/22
+- Designed prototype gimbal rings.
+<p>
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/gimbal_animationV1.gif" >
+</p>
+    
