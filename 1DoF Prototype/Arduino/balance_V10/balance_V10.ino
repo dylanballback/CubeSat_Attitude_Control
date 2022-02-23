@@ -39,9 +39,9 @@ uint8_t i2cData[14]; // Buffer for I2C data
 
 //---------------------------------------- PID Vars START -------------------------------------------------------
 //PID constants
-double kp = 19;
-double ki = 0;
-double kd = 25;
+double kp = 20;
+double ki = 0.0001;
+double kd = 1;
 
 double outMin = -400;
 double outMax = 400;
@@ -348,8 +348,8 @@ double computePID(double inp, double x_angle){
     Output = outMin;
   }
   
-  //Serial.print("Output:");
-  //Serial.println(Output);
+  //Serial.print("error:");
+  //Serial.println(error);
   //Serial.print("");
   lastError = error;            //remember current error
   previousTime = currentTime;   //remember current time
