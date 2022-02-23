@@ -22,7 +22,9 @@ boolean Direction_right = true;
 volatile long right_wheel_pulse_count = 0;
  
 // One-second interval for measurements
-int interval = 1000;
+int interval =800;
+int second = 1000/interval;
+int minute = 60000/interval;
   
 // Counters for milliseconds during interval
 long previousMillis = 0;
@@ -95,10 +97,10 @@ void loop() {
     previousMillis = currentMillis;
  
     // Calculate revolutions per minute
-    rpm_right = (float)(right_wheel_pulse_count * 60 / ENC_COUNT_REV);
+    rpm_right = (float)(right_wheel_pulse_count * minute) / ENC_COUNT_REV;
     ang_velocity_right = rpm_right * rpm_to_radians;   
     ang_velocity_right_deg = ang_velocity_right * rad_to_deg;
-    ang_acc = (ang_velocity_right - prev_ang_velocity_right);
+    ang_acc = (ang_velocity_right - prev_ang_velocity_right)/(second);
     prev_ang_velocity_right = ang_velocity_right;
     
     //Serial.println();
