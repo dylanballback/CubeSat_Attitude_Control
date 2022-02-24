@@ -39,9 +39,9 @@ uint8_t i2cData[14]; // Buffer for I2C data
 
 //---------------------------------------- PID Vars START -------------------------------------------------------
 //PID constants
-double kp = 20;
-double ki = 0.0001;
-double kd = 1;
+double kp = -1.25723694241297;
+double ki = 0;
+double kd = -0.110651147756469;
 
 double outMin = -400;
 double outMax = 400;
@@ -203,9 +203,13 @@ void loop() {
   }
   
   Serial.print("x_angle:");
-  Serial.println(x_angle);
-  //Serial.print("   "); 
-  
+  Serial.print(x_angle);
+  Serial.print("   "); 
+  Serial.print("Output:");
+  Serial.print(Output);
+  Serial.print("   "); 
+  Serial.print("pwm:");
+  Serial.println(pwm);
 
   //This is the comand to drive the motor
   driveMotor(pwm, dir);
