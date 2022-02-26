@@ -1,3 +1,5 @@
+#Refrenenced https://roboticsbackend.com/raspberry-pi-arduino-serial-communication/
+
 #!/usr/bin/env python3
 import serial
 import time
