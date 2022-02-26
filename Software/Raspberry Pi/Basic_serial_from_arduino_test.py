@@ -11,7 +11,7 @@ if __name__ == '__main__':
     """
     #Basic reading serial data from arduino and printing it
 
-    While True:
+    while True:
         if ser.in_waiting > 0:
             line = ser.readline().decode('utf-8').rstrip()
             print(line)
