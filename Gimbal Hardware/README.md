@@ -38,4 +38,10 @@ The goal of the gimbal is to design and build a system that a 1U CubeSat mounts 
 <p>
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/gimbal_animationV1.gif" width="1000" >
 </p>
-    
+
+
+### 2/26/22
+- 3D printed prototype gimbal ring, testing bearings and fitment of componets and connectors.
+<p>
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/3D_printed_gimbal_ring_prototypeV1.gif" width="1000" >
+</p>

@@ -39,9 +39,9 @@ uint8_t i2cData[14]; // Buffer for I2C data
 
 //---------------------------------------- PID Vars START -------------------------------------------------------
 //PID constants
-double kp = -1.25723694241297;
+double kp = 1.25723694241297*57.295;
 double ki = 0;
-double kd = -0.110651147756469;
+double kd = 0.110651147756469*57.295;
 
 double outMin = -400;
 double outMax = 400;
