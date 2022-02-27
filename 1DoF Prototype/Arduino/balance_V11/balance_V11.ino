@@ -2,6 +2,7 @@
 #include <Wire.h>        // IIC communication library
 #include <PWM.h>        // Require Timer1 PWM frequency of 20Khz-25Khz for Nidec 24H677 BLDC Motor
 
+
 //Cite http://brettbeauregard.com/blog/2011/04/improving-the-beginner%E2%80%99s-pid-reset-windup/)
 
 //---------------------------------------- Nidec 24H677H010 BLDC Motor Vars START ------------------------------------
@@ -83,9 +84,9 @@ uint8_t i2cData[14]; // Buffer for I2C data
 
 //---------------------------------------- PID Vars START -------------------------------------------------------
 //PID constants
-double kp = 1.25723694241297*57.295;
+double kp = 1.25723694241297; //*57.295 converts from rad/s to deg/s
 double ki = 0;
-double kd = 0.110651147756469*57.295;
+double kd = 0.110651147756469; //*57.295 converts from rad/s to deg/s
 
 double outMin = -400;
 double outMax = 400;
@@ -218,7 +219,9 @@ void loop() {
     right_wheel_pulse_count = 0;
     previous_ang_velocity = ang_velocity_right;
   }
-  
+  Serial.print("ang_velocity_right: ");
+  Serial.print(ang_velocity_right);
+  Serial.print("   ");
   ///Serial.print("SetPoint:");
   //Serial.print(Setpoint);
   //Serial.print("   ");

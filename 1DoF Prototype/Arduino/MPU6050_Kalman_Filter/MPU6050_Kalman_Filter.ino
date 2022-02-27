@@ -86,9 +86,12 @@ void setup() {
   compAngleY = pitch;
 
   timer = micros();
+  Serial.println("I am working");
 }
 
 void loop() {
+  Serial.println("I am working loop");
+
   /* Update all the values */
   while (i2cRead(0x3B, i2cData, 14));
   accX = (int16_t)((i2cData[0] << 8) | i2cData[1]);
