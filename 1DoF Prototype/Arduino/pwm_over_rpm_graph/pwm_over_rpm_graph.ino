@@ -89,8 +89,6 @@ void loop() {
   // Record the time
   currentMillis = millis();
   
-  
-  
   // If one second has passed, print the number of pulses
   if (currentMillis - previousMillis > interval) {
     driveMotor(pwm_signal, 1);
@@ -109,17 +107,24 @@ void loop() {
     
     //Serial.print("   ");
     //Serial.println();
- 
+    int flipped_pwm = map(pwm_signal, 380, 0, 0, 380);
     right_wheel_pulse_count = 0;
     previous_ang_velocity = ang_velocity_right;
+    Serial.print(flipped_pwm);
+    Serial.print(","); 
+    Serial.println(rpm_right);
 
   }
-  int flipped_pwm = map(pwm_signal, 380, 0, 0, 380);
+
+
+  if (pwm_signal == 0){
+    pwm_signal = 380;
+    }
   //Serial.print("flipped_pwm:");
-  Serial.print(flipped_pwm);
-  Serial.print(","); 
+  //Serial.print(flipped_pwm);
+  //Serial.print(","); 
   //Serial.print("RPM:");
-  Serial.println(rpm_right);
+  //Serial.println(rpm_right);
   //Serial.print("   ");
   //Serial.print("AngularVelocity:");
   //Serial.println(ang_velocity_right);
