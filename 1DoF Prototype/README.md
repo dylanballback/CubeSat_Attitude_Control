@@ -125,6 +125,8 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 
 ### 2/25/22
-- Worked with Dr. White to derive EOM for our system and build a matlab model with a simulink PID. Discovered that our matlab model PID output is in Amps, so we derived an equation to covert Amp to Voltage for the motor, which required me to calulate the back EMF for the motor. ([Python code that calulates motors back emf](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Software/Python/pwm_rpm_plot.py)) 
+- Worked with Dr. White to derive EOM for our system and build a matlab model with a simulink PID. Discovered that our matlab model PID output is in Amps, so we derived an equation to covert Amp to Voltage for the motor, which required me to calulate the back EMF for the motor. 
+- Wrote a python script that automates calulating the motor back emf over muiltiple trials and outputing the average of all the trials. I used python to read the serial data from the arduino and parse and run some calulation functions.
+([Python code that calulates motors back emf](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Software/Python/pwm_rpm_plot.py)) ([Arduino code supports the python function that calulates motors back emf](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Software/Python/pwm_over_rpm_graph/pwm_over_rpm_graph.ino)) 
 
 
