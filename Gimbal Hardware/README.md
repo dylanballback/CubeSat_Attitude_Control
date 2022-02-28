@@ -9,17 +9,17 @@ The goal of the gimbal is to design and build a system that a 1U CubeSat mounts 
 ### Gimbal CAD
 | Declared | To-Do | Completed |
 --- | --- | ---
-| 2/8/22 | Design mounting mechanism to attach the 1U CubeSat to the inner ring |
-| 2/8/22 | 3D print and test fitment of CubeSat connection to inner ring |
-| 2/8/22 | Calculate and design the smallest inner ring possible |
-| 2/8/22 | 3D print and test fitment of inner ring componets connection (if the ring is split into muiltiple prints) |
-| 2/8/22 | Design the middle ring that can freely rotate around the inner ring |
-| 2/8/22 | 3D print and test fitment of middle ring componets connection (if the ring is split into muiltiple prints) |
-| 2/8/22 | Design the outter ring that can freely rotate around the middle ring |
-| 2/8/22 | 3D print and test fitment of outter ring componets connection (if the ring is split into muiltiple prints) |
-| 2/8/22 | Design the bearing mounts and connection between each ring |
-| 2/8/22 | Test fitment of bearing componets into 3D printed ring and connection between the rings |
-| 2/8/22 | Design outter ring external mounting points to be compatiable to monut to a 80/20 test stand |
+| 2/8/22 | ~Design mounting mechanism to attach the 1U CubeSat to the inner ring~ | 2/20/22
+| 2/8/22 | ~3D print and test fitment of CubeSat connection to inner ring~ | 2/20/22
+| 2/8/22 | ~Calculate and design the 3 gimbal rings~ | 2/20/22
+| 2/8/22 | ~3D print and test fitment of the 3 rings and connection~ | 2/26/22
+| 2/8/22 | ~Test fitment of bearing componets into 3D printed ring and connection between the rings~ | 2/26/22
+| 2/8/22 | ~Design outter ring external mounting points to be compatiable to monut to a 80/20 test stand~ | 2/27/22
+| 2/8/22 | ~Build 80/20 Gimbal Test stand~ | 2/27/22
+| 2/8/22 | ~Assembly and mount all componets of the gimbal and cubesat into the test stand~ | 2/27/22
+| 2/8/22 | Optimize ring componet fitment and connections |
+
+
 
 
 
@@ -55,3 +55,6 @@ The goal of the gimbal is to design and build a system that a 1U CubeSat mounts 
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/gimbal_v1_front.JPG" width="500" >
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/gimbal_v1side.JPG" width="500" >
 </p>
+
+### 2/28/22 
+- Optmizing CAD for press fitment of the bearings and ring connections

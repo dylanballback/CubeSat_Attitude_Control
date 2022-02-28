@@ -118,3 +118,9 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 - Working on collecting individual motor data for both at 12V and 24V and with no load, and the reaction wheel load.
 - Rewrote PID balance code so that the change in direction of the motor is based off the PID output itself, previously I had the direction flip based off the angle. ([Untuned Balance PID code V8](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V8/balance_V7.ino))
 
+
+### 2/17/22
+
+- Worked on new attempt of getting the PID to work, different trials with larger motor step sizes. realized that this was not the smartest way to modify the PID loop to achive our desired goal since I was adding more variables to the eqution. [Untuned Balance PID code V9](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V7/balance_V9.ino))
+
+
