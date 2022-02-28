@@ -94,7 +94,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 
 - Working on different PID Arduino code, trying variety of differnt methods comparing if the results of my version of the PID code matches the output of a PID code using the Arduino PID package, Version 5, and Version 6.  ([Untuned Balance PID code V5](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V5/balance_V5.ino))  ([Untuned Balance PID code V6](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V6/balance_V6.ino))
 
-
+---
 
 ### 2/15/22
 
@@ -110,6 +110,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/1Dof_testbed/1DOF_base_back.png" width="400" style="float: right">
 </p>    
 
+---
 
 ### 2/16/22
 
@@ -118,15 +119,19 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 - Working on collecting individual motor data for both at 12V and 24V and with no load, and the reaction wheel load.
 - Rewrote PID balance code so that the change in direction of the motor is based off the PID output itself, previously I had the direction flip based off the angle. ([Untuned Balance PID code V8](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V8/balance_V7.ino))
 
+---
 
 ### 2/17/22
 
-- Worked on new attempt of getting the PID to work, different trials with larger motor step sizes. realized that this was not the smartest way to modify the PID loop to achive our desired goal since I was adding more variables to the eqution. [Untuned Balance PID code V9](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V7/balance_V9.ino))
+- Worked on new attempt of getting the PID to work, different trials with larger motor step sizes. realized that this was not the smartest way to modify the PID loop to achive our desired goal since I was adding more variables to the eqution. ((([Untuned Balance PID code V9](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V7/balance_V9.ino))
 
+---
 
 ### 2/25/22
-- Worked with Dr. White to derive EOM for our system and build a matlab model with a simulink PID. Discovered that our matlab model PID output is in Amps, so we derived an equation to covert Amp to Voltage for the motor, which required me to calulate the back EMF for the motor. 
+- Worked with Dr. White to derive EOM for our system and build a matlab model with a simulink PID. Discovered that our matlab model PID output is in Amps, so we derived an equation to covert Amp to Voltage for the motor, which required me to calulate the back EMF for the motor. ([All Matlab code](https://github.com/dylanballback/CubeSat_Attitude_Control/tree/main/Software/Matlab)) 
+
 - Wrote a python script that automates calulating the motor back emf over muiltiple trials and outputing the average of all the trials. I used python to read the serial data from the arduino and parse and run some calulation functions.
 ([Python code that calulates motors back emf](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Software/Python/pwm_rpm_plot.py)) ([Arduino code supports the python function that calulates motors back emf](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Software/Python/pwm_over_rpm_graph/pwm_over_rpm_graph.ino)) 
+
 
 
