@@ -124,3 +124,7 @@ The goal of this is to first protoype how to balance a 1 degree of freedom syste
 - Worked on new attempt of getting the PID to work, different trials with larger motor step sizes. realized that this was not the smartest way to modify the PID loop to achive our desired goal since I was adding more variables to the eqution. [Untuned Balance PID code V9](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/1DoF%20Prototype/Arduino/balance_V7/balance_V9.ino))
 
 
+### 2/25/22
+- Worked with Dr. White to derive EOM for our system and build a matlab model with a simulink PID. Discovered that our matlab model PID output is in Amps, so we derived an equation to covert Amp to Voltage for the motor, which required me to calulate the back EMF for the motor. [Python code that calulate motors back emf](https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Software/Python/pwm_rpm_plot.py)
+
+
