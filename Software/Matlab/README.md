@@ -11,6 +11,8 @@ The goal of this is to develop a mathmatical model that simulated the real world
 | 2/20/22 | ~~Create simulink model of a PID with the EOM from Matlab script.~~ | 2/23/22
 | 2/20/22 | ~Tune values of PID based on simulink model and implment in real life model.~ | 2/24/22
 | 2/25/22 | Create arduino functions to allow for Matlab/Simulink model to be implemented on physical hardware. | 
+| 2/25/22 | Recalculate more accurate moments of intertia for the system. | 
+
 
 
 
