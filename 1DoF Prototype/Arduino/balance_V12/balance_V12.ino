@@ -468,8 +468,11 @@ double computePID(double inp, double x_angle){
 }
 
 double convert_to_pwm(double pid_out, double wheel_vel){
-  double x = (3*pid_out+Kw*wheel_vel);
-  pwm_out = 400*(1-x/max_motor_V);
+  double v_mot = Kw*wheel_vel;
+  double v_sup = 3*pid_out+v_mot;
+  pwm_out = map(v_sup, 0, 24, 400, 0);
+  //double x = (3*pid_out+Kw*wheel_vel);
+  //pwm_out = 400*(1-x/max_motor_V);
   return pwm_out;
 }
 
