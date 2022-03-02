@@ -6,26 +6,19 @@ Reference [This tutorial](https://dle-dev.com/index.php/en/2020/07/30/program-an
 
 # Installing PlatformIO Core on Raspberry Pi
 
-`sudo python3 -m pip install -U platformio`
+
 
 First, you must connect to the Raspberry PI via SSH:
 
-    <html>
-        <head>
-        ssh mylogin@addressIpRaspberry
-        </head>
+    `ssh mylogin@addressIpRaspberry`
 
 If so, Python3 and pip must be installed. Otherwise enter the following command:
 
-    <html>
-        <head>
-        sudo apt-get install python3 python3-pip
-        </head>
+    `sudo apt-get install python3 python3-pip`
+
 
 Installation of PlatformIO Core on the Raspberry PI:
 
-    <html>
-        <head>
-        sudo python3 -m pip install -U platformio
-        </head>
+    `sudo python3 -m pip install -U platformio`
+
 
