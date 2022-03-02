@@ -11,6 +11,7 @@ This is section is where I am testing the best method to wirelessly upload code.
 | 2/8/22 | ~Develop and write the Raspberry Pi function that can send commands to Arduino~| 2/26/22
 | 2/8/22 | ~Develop and write the Raspberry Pi function that can recive data from the Arduino~ | 2/26/22
 | 2/8/22 | ~Set up Raspberry Pi so it can upload an Arduino sketch through the terminal~ | 3/2/22
+| 3/2/22 | Set up git for remote upload through Raspberry Pi SSH arduino code upload |
 | 2/8/22 | Get Raspberry Pi connected to webserver to upload code from Easycontrols.com |
 | 2/8/22 | Develop and write documentation on Raspberry Pi python code for all the control commands to Arduino |
 
