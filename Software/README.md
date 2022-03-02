@@ -12,3 +12,14 @@ The goal is to develop a PID control algorithum that will allow for the 1U CubeS
 | 2/8/22 | ~Develop function that can wirelessly upload Arduino code through the Raspberry Pi~ | 3/2/22
 | 2/8/22 | Get Raspberry Pi connected to webserver to upload code from Easycontrols.org |
 | 2/8/22 | Develop and write documentation on Raspberry Pi control commands to Arduino |
+
+## Updates 
+
+### 2/26/22
+- Developed serial communication between Arduino and Raspberry Pi. [See more information about this here](https://github.com/dylanballback/CubeSat_Attitude_Control/tree/main/Software/Raspberry%20Pi%20%26%20Arduino%20Com)
+
+
+---
+
+### 2/27/22
+

@@ -15,6 +15,8 @@ This is section is where I am testing the best method to wirelessly upload code.
 | 2/8/22 | Develop and write documentation on Raspberry Pi python code for all the control commands to Arduino |
 
 
+## Updates 
+
 ### 2/26/22
 - Developed the arduino and python code that would enable for serial communication between the two devices. While experimenting with this, I realized that my original idea of sending the sensor data through the Arduino to the Raspberry Pi via a serial connection and then processing the control code on the Raspberry Pi and sending the motor commands back to the Arduino would be way to slow for this application. [Serial communication between Arduino and Pi Code](https://github.com/dylanballback/CubeSat_Attitude_Control/tree/main/Software/Raspberry%20Pi%20%26%20Arduino%20Com/Serial%20Communication)
 
