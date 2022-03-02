@@ -373,13 +373,18 @@ double kalman(){
   //Serial.print('\n');
   //return kalAngleX;
 
-  rad_kalAngleX = kalAngleX * 0.174532925;
+  rad_kalAngleX = deg_to_rad(kalAngleX);
   //Serial.println(rad_kalAngleX);
   return rad_kalAngleX;
   
 }
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  Kalman Filter Function END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
+// converts degrees to radians 
+double deg_to_rad(double deg_in) {
+  double rad_out = deg_in * 0.174532925;
+  return rad_out;
+}
 
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  Encoder Function START $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
