@@ -38,7 +38,7 @@ boolean Direction_right = true;
 volatile long right_wheel_pulse_count = 0;
  
 // One-second interval for measurements
-int interval = 1000;
+int interval = 100;
   
 // Counters for milliseconds during interval
 long previousMillis = 0;
@@ -84,12 +84,12 @@ uint8_t i2cData[14]; // Buffer for I2C data
 
 //---------------------------------------- PID Vars START -------------------------------------------------------
 //PID constants
-double kp = 28.5272885398825; //*57.295 converts from rad/s to deg/s
+double kp = 1; //*57.295 converts from rad/s to deg/s
 double ki = 0;
-double kd = 0.429938088164766; //*57.295 converts from rad/s to deg/s
+double kd = 0.5; //*57.295 converts from rad/s to deg/s
 
-double outMin = -400;
-double outMax = 400;
+double outMin = -8;
+double outMax = 8;
 
 //Motor Back EMF Constant
 double Kw = 0.00834;
@@ -222,52 +222,35 @@ void loop() {
   Serial.print("ang_velocity_right: ");
   Serial.print(ang_velocity_right);
   Serial.print("   ");
-  ///Serial.print("SetPoint:");
-  //Serial.print(Setpoint);
-  //Serial.print("   ");
-  //Serial.print("outMin:");
-  //Serial.print(outMin);
-  //Serial.print("   ");
-  //Serial.print("outMax:");
-  //Serial.print(outMax);
-  //Serial.print("   ");
-  
+
   double x_angle = kalman();
-  //Serial.print("x_angle:");
-  //Serial.println(x_angle);
-  //Serial.print("   ");
+
   Input = x_angle;
-  Serial.print("Input:");
-  Serial.print(Input);
-  Serial.print("   ");
+
   
   //Calculate the PID output
   Output = computePID(Input, x_angle);
-  Serial.print("Output:");
-  Serial.print(Output);
-  Serial.print("   ");
 
-  Output_pwm = convert_to_pwm(Output, rpm_right);
-  Serial.print("Output_pwm:");
-  Serial.print(Output_pwm);
-  Serial.print("   ");
   
   
     //Switches the direction of the wheel based on sign of PID output
   if (Output > 1){
     dir = 1; //CW
+    Output_pwm = convert_to_pwm(Output, rpm_right);
     //This is just fliping the PWM value from 0 to 390 ---> to 390 to 0
     //Whereas 0 = stopped and 390 = full speed
-    pwm = map(Output, 0, outMax, 400, 0);
+    pwm = map(Output_pwm, 0, 400, 400, 0);
     //Serial.print("dir: ");
     //Serial.print("CW");
     //Serial.print("    ");
   }
   else if (Output < 0){
     dir = 0; //CCW
+    Output = abs(Output);
+    Output_pwm = convert_to_pwm(Output, rpm_right);
     //This is just fliping the PWM value from -390 to 0 ---> to 390 to 0
     //Whereas 0 = stopped and 390 = full speed
-    pwm = map(Output, 0, outMin, 400, 0);
+    pwm = map(Output_pwm, 0, 400, 400, 0);
     //Serial.print("dir: ");
     //Serial.print("CCW");
     //Serial.print("    ");
@@ -288,7 +271,7 @@ void loop() {
   Serial.println(pwm);
 
   //This is the comand to drive the motor
-  driveMotor(pwm, dir);
+  driveMotor(pwm , dir);
   
 
 }//end of loop void
@@ -373,6 +356,8 @@ double kalman(){
   //Serial.print('\n');
   //return kalAngleX;
 
+  
+
   rad_kalAngleX = deg_to_rad(kalAngleX);
   //Serial.println(rad_kalAngleX);
   return rad_kalAngleX;
@@ -448,14 +433,11 @@ double computePID(double inp, double x_angle){
   else if(i< outMin){
     i=outMin;
   }
-  //Serial.print("i:");
-  //Serial.print(i);
-  //Serial.print("   ");
+ 
   d = (error - lastError)/elapsedTime;   // compute derivative
-  //Serial.print("d:");
-  //Serial.print(d);
-  //Serial.print("   ");
-  double Output = kp*error + ki*i + kd*d;  //PID output              
+
+  double Output = kp*error + ki*i + kd*d;  //PID output
+                
   if(Output > outMax){ 
     Output = outMax;
   }
@@ -463,9 +445,6 @@ double computePID(double inp, double x_angle){
     Output = outMin;
   }
   
-  //Serial.print("error:");
-  //Serial.println(error);
-  //Serial.print("");
   lastError = error;            //remember current error
   previousTime = currentTime;   //remember current time
           
@@ -475,7 +454,7 @@ double computePID(double inp, double x_angle){
 double convert_to_pwm(double pid_out, double wheel_vel){
   double v_mot = Kw*wheel_vel;
   double v_sup = 3*pid_out+v_mot;
-  pwm_out = map(v_sup, 0, 24, 400, 0);
+  pwm_out = map(v_sup, 0, 24, 0, 400);
   //double x = (3*pid_out+Kw*wheel_vel);
   //pwm_out = 400*(1-x/max_motor_V);
   return pwm_out;
