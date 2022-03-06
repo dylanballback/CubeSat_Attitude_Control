@@ -84,15 +84,15 @@ uint8_t i2cData[14]; // Buffer for I2C data
 
 //---------------------------------------- PID Vars START -------------------------------------------------------
 //PID constants
-double kp = 1; //*57.295 converts from rad/s to deg/s
+double kp = 9.02625023424235; //*57.295 converts from rad/s to deg/s
 double ki = 0;
-double kd = 0.5; //*57.295 converts from rad/s to deg/s
+double kd = 0.293287963927361; //*57.295 converts from rad/s to deg/s
 
 double outMin = -8;
 double outMax = 8;
 
 //Motor Back EMF Constant
-double Kw = 0.00834;
+double Kw = 0.03148948875;//0.00834rpm
 int max_motor_V = 24; 
 
 double bounds = 0.2;
