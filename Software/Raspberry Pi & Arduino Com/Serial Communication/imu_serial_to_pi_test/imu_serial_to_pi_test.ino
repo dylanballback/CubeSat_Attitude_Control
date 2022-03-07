@@ -39,7 +39,7 @@ uint8_t i2cData[14]; // Buffer for I2C data
 // TODO: Make calibration routine
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(500000);
   Wire.begin();
 #if ARDUINO >= 157
   Wire.setClock(400000UL); // Set I2C frequency to 400kHz
@@ -159,7 +159,8 @@ void loop() {
   if (gyroYangle < -180 || gyroYangle > 180)
     gyroYangle = kalAngleY;
 
-
+  //kalAngleX = float(kalAngleX);
+  //String kalAngleX_str = String(kalAngleX, 2);
   
   Serial.println(kalAngleX);  
   
