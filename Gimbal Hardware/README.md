@@ -80,3 +80,14 @@ The goal of the gimbal is to design and build a system that a 1U CubeSat mounts 
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/front_cubesat_gimbal_V2.JPG" width="500" >
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/side_cubesat_gimbal_V2.JPG" width="500" >
 </p>
+
+---
+
+### 3/4/22
+- Designed and 3D printed a gimbal lock piece that snaps in place to lock the gimbal rings in place, this will allow for me to test the reaction wheel PID control of just a single axis in the gimbal mount. 
+
+<p>
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/front_1dof_gimbal_lock.JPG" width="500" >
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/locked_1dor_gimbal.gif" width="500" >
+    
+</p>
