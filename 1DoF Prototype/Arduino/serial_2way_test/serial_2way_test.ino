@@ -129,7 +129,7 @@ void loop() {
     int inChar = Serial.read();
     if (isDigit(inChar)) {
       // convert the incoming byte to a char and add it to the string:
-      inString += (char)inChar;
+      inString += (char)inChar; 
     }
     // if you get a newline, print the string, then the string's value:
     if (inChar == '\n') {
@@ -137,15 +137,14 @@ void loop() {
       // clear the string for new input:
       inString = "";
     }
-    //This is the comand to drive the motor
+    if (pwm > 0){
+      dir = 0; 
+    }
+    else if (pwm < 0){
+      dir = 1;
+    }
     driveMotor(pwm, dir);
   }
-  
-  
-  
-  
-  
-
 }//end of loop void
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Loop Function END %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
