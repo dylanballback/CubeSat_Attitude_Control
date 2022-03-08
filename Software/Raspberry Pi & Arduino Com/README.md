@@ -36,7 +36,7 @@ This is section is where I am testing the best method to wirelessly upload code.
 ---
 
 ### 3/5/22
-- Set up the Raspberry Pi Zero with github to enable for me to update the arduino sketch on my laptop and then push it to github. Then go through the Raspberry Pi SSH connection and git pull the updated code and upload it to the Arduino throught the Pi with Platformio. This got rid of the need to use Nano or Vim on the Pi terminal window for programing which was not very user friendly and lacks features that VS code has.
+- Set up the Raspberry Pi Zero with github to enable for me to update the arduino sketch on my laptop and then push it to github. Then go through the Raspberry Pi SSH connection and git pull the updated code and upload it to the Arduino throught the Pi with Platformio. This got rid of the need to use Nano or Vim on the Pi terminal window for programing which was not very user friendly and lacks features that VS code has. [Github link for easily uploading code to Raspberry Pi Zero]https://github.com/dylanballback/Arduinoproject)
 
 ---
 
