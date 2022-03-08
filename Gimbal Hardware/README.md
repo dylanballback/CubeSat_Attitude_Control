@@ -75,8 +75,8 @@ The goal of the gimbal is to design and build a system that a 1U CubeSat mounts 
 - Updated gimbal mounts to CubeSat frame using threaded inserts on the side frame of the CubeSat instead previously where I was mounting it from corners. Using this method will allow for the CubeSat frame itself will be easier to 3D print and rapidly iterated upon and not require new print everytime to mount to the gimbal. 
 
 <p>
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/front_cubesat_mountV2.png" width="500" >
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/side_cubesat_mountV2.JPG" width="500" >
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/front_cubesat_monutV2.JPG" width="500" >
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/side_cubesat_monutV2.JPG" width="500" >
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/front_cubesat_gimbal_V2.JPG" width="500" >
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/side_cubesat_gimbal_V2.JPG" width="500" >
 </p>
