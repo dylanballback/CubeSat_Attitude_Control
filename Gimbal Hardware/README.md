@@ -88,6 +88,6 @@ The goal of the gimbal is to design and build a system that a 1U CubeSat mounts 
 
 <p>
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/front_1dof_gimbal_lock.JPG" width="500" >
-    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/locked_1dor_gimbal.gif" width="500" >
+    <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/cubesat_hardware/locked_1dof_gimbal.gif" width="500" >
     
 </p>
