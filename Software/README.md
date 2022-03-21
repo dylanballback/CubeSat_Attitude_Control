@@ -24,3 +24,10 @@ The goal is to develop a PID control algorithum that will allow for the 1U CubeS
 ### 3/2/22
 
 - Working on different methods of Raspberry Pi and Arudino communication can see more updates [See more information about this here](https://github.com/dylanballback/CubeSat_Attitude_Control/tree/main/Software/Raspberry%20Pi%20%26%20Arduino%20Com)
+
+
+---
+
+### 3/21/22
+
+- Experimenting with websockets and WiFi enabled Arduino to be able to wirelessly recive and transmit data between the Arduino. 
