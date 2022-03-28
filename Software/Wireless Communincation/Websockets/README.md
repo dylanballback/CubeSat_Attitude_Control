@@ -18,8 +18,7 @@ Why websockets?
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/Software/Flask_socketio_server_test.png" width="500" >
 </p>
 
-- You can see below the browser on the left sends "250" and the browser on the right recives it 
-- Then the browser on the right sends "100" and the browser on the left recives it 
+- You can see below the browser on the left sends "250" and both browsers recives it. Then the browser on the right sends "100" and both browsers recives it.
 
 - Now it is required for the Arudino with Wifi to connect to the websocket and recive the data send from the browser.
 
