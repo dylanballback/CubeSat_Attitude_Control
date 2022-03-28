@@ -12,7 +12,7 @@ Why websockets?
 ### 3/24/22
 - Created basic Python Flask based webserver with simple HTML webpage to enable for user to enter in data into a form and then submit their data and send it through a SocketIO (Flask websocket package) to communicate between all the different webrowser connections.
 
-<p float="left">
+<p float="center">
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/Software/Flask_socketio_server_test.png" width="500" >
 </p>
 
