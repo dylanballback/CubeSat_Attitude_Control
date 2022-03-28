@@ -1,0 +1,10 @@
+click==8.0.4
+Flask==2.0.3
+flask-sock==0.5.2
+h11==0.13.0
+itsdangerous==2.1.2
+Jinja2==3.1.1
+MarkupSafe==2.1.1
+simple-websocket==0.5.1
+Werkzeug==2.0.3
+wsproto==1.1.0
