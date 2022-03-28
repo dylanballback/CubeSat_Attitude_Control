@@ -17,6 +17,7 @@ Why websockets?
 <p align="center">
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/Software/Flask_socketio_server_test.png" width="500" >
 </p>
+
 - You can see below the browser on the left sends "250" and the browser on the right recives it 
 - Then the browser on the right sends "100" and the browser on the left recives it 
 
