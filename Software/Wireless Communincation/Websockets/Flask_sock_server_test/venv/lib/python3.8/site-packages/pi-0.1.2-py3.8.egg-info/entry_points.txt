@@ -1,0 +1,4 @@
+[console_scripts]
+easy_uninstall = pi.commands.uninstall:easy_uninstall
+pi = pi.cli:main
+
