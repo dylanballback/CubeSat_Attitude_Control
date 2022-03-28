@@ -19,5 +19,6 @@ Why websockets?
     <img src="https://github.com/dylanballback/CubeSat_Attitude_Control/blob/main/Images/Software/Flask_socketio_server_test.png" width="500" >
 </p>
 
+- Now it is required for the Arudino with Wifi to connect to the websocket and recive the data send from the browser.
 
 ---
