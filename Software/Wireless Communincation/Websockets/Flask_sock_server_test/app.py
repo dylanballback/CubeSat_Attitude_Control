@@ -4,16 +4,14 @@ from flask_sock import Sock
 app = Flask(__name__)
 sock = Sock(app)
 
-\
+
 @sock.route('/')
 def reverse(ws):
     ws.send("DYLAN")
     while True:
-        #text = ws.receive()
-       #ws.send(text[::-1])
-       ws.send("HELLO WORLD")
-
-
+        text = ws.receive()
+        ws.send(text[::-1])
+        #ws.send("HELLO WORLD")
 
 
 if __name__ == "__main__":
