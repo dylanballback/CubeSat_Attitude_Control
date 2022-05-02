@@ -1,0 +1,19 @@
+<html>
+    <body>
+        test
+        <script src="reconnecting-websocket.min.js"></script>
+        <script>
+            var ws;
+            async function websocket() {
+                var ip = "127.0.0.1";
+                var port = 5678;
+                ws = new ReconnectingWebSocket("ws://" + ip + ":" + port + "/");
+                ws.onmessage = function (event) {
+                    var message = event.data;
+                    console.log(message);
+                };
+            }
+            websocket(); 
+        </script>
+    </body>
+</html>
